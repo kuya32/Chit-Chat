@@ -15,6 +15,7 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.draw.scale
+import com.github.kuya32.chitchat.presentation.utils.Screen
 import com.github.kuya32.chitchat.utils.Constants
 import kotlinx.coroutines.delay
 
@@ -39,6 +40,7 @@ fun SplashScreen(
             )
         )
         delay(Constants.SPLASH_SCREEN_DURATION)
+        navController.navigate(Screen.LoginScreen.route)
     }
     Box(
         modifier = Modifier.fillMaxSize(),
