@@ -1,4 +1,4 @@
-package com.github.kuya32.chitchat.ui.theme
+package com.github.kuya32.chitchat.presentation.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
