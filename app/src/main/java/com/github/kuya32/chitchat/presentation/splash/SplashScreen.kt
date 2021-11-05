@@ -17,11 +17,15 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.draw.scale
 import com.github.kuya32.chitchat.presentation.utils.Screen
 import com.github.kuya32.chitchat.utils.Constants
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 
 @Composable
 fun SplashScreen(
-    navController: NavController
+    navController: NavController,
+    dispatcher: CoroutineDispatcher = Dispatchers.Main
 ) {
     val scale = remember {
         Animatable(0f)
@@ -30,15 +34,17 @@ fun SplashScreen(
         OvershootInterpolator(2f)
     }
     LaunchedEffect(key1 = true) {
-        scale.animateTo(
-            targetValue = 1.15f,
-            animationSpec = tween(
-                durationMillis = 750,
-                easing = {
-                    overshootInterpolator.getInterpolation(it)
-                }
+        withContext(dispatcher) {
+            scale.animateTo(
+                targetValue = 1.15f,
+                animationSpec = tween(
+                    durationMillis = 750,
+                    easing = {
+                        overshootInterpolator.getInterpolation(it)
+                    }
+                )
             )
-        )
+        }
         delay(Constants.SPLASH_SCREEN_DURATION)
         navController.navigate(Screen.LoginScreen.route)
     }

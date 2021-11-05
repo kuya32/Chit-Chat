@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Chit Chat</string>
+    <string name="login">Login</string>
+    <string name="password_hint">Password</string>
+    <string name="username_email_hint">Username / Email</string>
+    <string name="password_visibility_icon">Password Visibility Icon</string>
+    <string name="dont_have_an_account_yet">Don\'t have an account yet?</string>
+    <string name="sign_up">Sign Up</string>
 </resources>
