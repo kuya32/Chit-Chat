@@ -5,6 +5,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Password
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -55,7 +58,8 @@ fun LoginScreen(
                     viewModel.setUsernameText(it)
                 },
                 hint = stringResource(id = R.string.username_email_hint),
-                keyboardType = KeyboardType.Text
+                keyboardType = KeyboardType.Text,
+                leadingIcon = Icons.Filled.Email
             )
             Spacer(modifier = Modifier.height(SpaceSmall))
             StandardTextField(
@@ -64,7 +68,8 @@ fun LoginScreen(
                     viewModel.setPasswordText(it)
                 },
                 hint = stringResource(id = R.string.password_hint),
-                keyboardType = KeyboardType.Password
+                keyboardType = KeyboardType.Password,
+                leadingIcon = Icons.Filled.Password
             )
             Spacer(modifier = Modifier.height(SpaceSmall))
             Button(

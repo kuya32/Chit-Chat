@@ -1,6 +1,7 @@
 package com.github.kuya32.chitchat.presentation.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -17,6 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.dp
 import com.github.kuya32.chitchat.R
 
 @Composable
@@ -24,6 +26,9 @@ fun StandardTextField(
     text: String = "",
     hint: String = "",
     isError: Boolean = false,
+    maxLength: Int = 40,
+    maxLines: Int = 1,
+    leadingIcon: ImageVector? = null,
     keyboardType: KeyboardType = KeyboardType.Text,
     onValueChange: (String) -> Unit
 ) {
@@ -36,7 +41,12 @@ fun StandardTextField(
 
     TextField(
         value = text,
-        onValueChange = onValueChange,
+        onValueChange = {
+            if (it.length <= maxLength) {
+                onValueChange(it)
+            }
+        },
+        maxLines = maxLines,
         placeholder = {
             Text(
                 text = hint,
@@ -48,6 +58,17 @@ fun StandardTextField(
         keyboardOptions = KeyboardOptions(
             keyboardType = keyboardType
         ),
+        leadingIcon = if (leadingIcon != null) {
+            val icon: @Composable () -> Unit = {
+                Icon(
+                    imageVector = leadingIcon,
+                    contentDescription = null,
+                    tint = MaterialTheme.colors.onBackground,
+                    modifier = Modifier.size(24.dp)
+                )
+            }
+            icon
+        } else null,
         trailingIcon = {
             if (isPasswordToggleDisplayed) {
                 var image: ImageVector? = null
