@@ -15,14 +15,19 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.github.kuya32.chitchat.R
+import com.github.kuya32.chitchat.presentation.utils.TestTags
+import com.github.kuya32.chitchat.utils.Constants
 
 @Composable
 fun StandardTextField(
+    modifier: Modifier = Modifier,
     text: String = "",
     hint: String = "",
     isError: Boolean = false,
@@ -78,9 +83,15 @@ fun StandardTextField(
                     image = Icons.Filled.VisibilityOff
                 }
 
-                IconButton(onClick = {
+                IconButton(
+                    onClick = {
                     isPasswordVisible = !isPasswordVisible
-                }) {
+                    },
+                    modifier = Modifier
+                        .semantics {
+                            testTag = TestTags.PASSWORD_TOGGLE
+                        }
+                ) {
                     if (image != null) {
                         Icon(imageVector = image, contentDescription = stringResource(id = R.string.password_visibility_icon))
                     }
@@ -90,5 +101,8 @@ fun StandardTextField(
         singleLine = true,
         modifier = Modifier
             .fillMaxWidth()
+            .semantics {
+                testTag = TestTags.STANDARD_TEXT_FIELD
+            }
     )
 }
