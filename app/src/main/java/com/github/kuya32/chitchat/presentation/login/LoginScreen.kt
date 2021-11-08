@@ -25,6 +25,7 @@ import com.github.kuya32.chitchat.presentation.components.StandardTextField
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceLarge
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceMedium
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceSmall
+import com.github.kuya32.chitchat.presentation.utils.Screen
 
 @Composable
 fun LoginScreen(
@@ -89,20 +90,20 @@ fun LoginScreen(
             text = buildAnnotatedString { 
                 append(stringResource(id = R.string.dont_have_an_account_yet))
                 append(" ")
-                val signUpText = stringResource(id = R.string.sign_up)
+                val registerText = stringResource(id = R.string.register)
                 withStyle(
                     style = SpanStyle(
                         color = MaterialTheme.colors.primary
                     )
                 ) {
-                    append(signUpText)
+                    append(registerText)
                 }
             },
             style = MaterialTheme.typography.body1,
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .clickable {
-                    // TODO: Navigate to register screen
+                    navController.navigate(Screen.RegisterScreen.route)
                 }
         )
     }

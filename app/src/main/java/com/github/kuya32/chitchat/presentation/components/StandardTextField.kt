@@ -20,6 +20,7 @@ import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.github.kuya32.chitchat.R
 import com.github.kuya32.chitchat.presentation.utils.TestTags
@@ -30,7 +31,7 @@ fun StandardTextField(
     modifier: Modifier = Modifier,
     text: String = "",
     hint: String = "",
-    isError: Boolean = false,
+    error: String = "",
     maxLength: Int = 40,
     maxLines: Int = 1,
     leadingIcon: ImageVector? = null,
@@ -58,7 +59,7 @@ fun StandardTextField(
                 style = MaterialTheme.typography.body1
             )
         },
-        isError = isError,
+        isError = error != "",
         visualTransformation = if (isPasswordToggleDisplayed && !isPasswordVisible) PasswordVisualTransformation() else VisualTransformation.None,
         keyboardOptions = KeyboardOptions(
             keyboardType = keyboardType
@@ -105,4 +106,14 @@ fun StandardTextField(
                 testTag = TestTags.STANDARD_TEXT_FIELD
             }
     )
+    if (error.isNotEmpty()) {
+        Text(
+            text = error,
+            style = MaterialTheme.typography.body2,
+            color = MaterialTheme.colors.error,
+            textAlign = TextAlign.End,
+            modifier = Modifier
+                .fillMaxWidth()
+        )
+    }
 }
