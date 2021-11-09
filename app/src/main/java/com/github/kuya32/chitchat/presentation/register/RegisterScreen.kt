@@ -1,4 +1,4 @@
-package com.github.kuya32.chitchat.presentation.login
+package com.github.kuya32.chitchat.presentation.register
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -6,9 +6,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.Password
-
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,12 +26,12 @@ import com.github.kuya32.chitchat.presentation.ui.theme.SpaceSmall
 import com.github.kuya32.chitchat.presentation.utils.Screen
 
 @Composable
-fun LoginScreen(
+fun RegisterScreen(
     navController: NavController,
-    viewModel: LoginViewModel = hiltViewModel()
+    viewModel: RegisterViewModel = hiltViewModel()
 ) {
     Box(
-        modifier = Modifier
+        Modifier
             .fillMaxSize()
             .padding(
                 start = SpaceLarge,
@@ -49,8 +47,18 @@ fun LoginScreen(
                 .padding(horizontal = SpaceMedium)
         ) {
             Text(
-                text = stringResource(id = R.string.login),
+                text = stringResource(id = R.string.register),
                 style = MaterialTheme.typography.h1
+            )
+            Spacer(modifier = Modifier.height(SpaceSmall))
+            StandardTextField(
+                text = viewModel.emailText.value,
+                onValueChange = {
+                    viewModel.setEmailText(it)
+                },
+                hint = stringResource(id = R.string.email_hint),
+                keyboardType = KeyboardType.Text,
+                leadingIcon = Icons.Filled.Email
             )
             Spacer(modifier = Modifier.height(SpaceSmall))
             StandardTextField(
@@ -58,9 +66,9 @@ fun LoginScreen(
                 onValueChange = {
                     viewModel.setUsernameText(it)
                 },
-                hint = stringResource(id = R.string.username_email_hint),
+                hint = stringResource(id = R.string.username_hint),
                 keyboardType = KeyboardType.Text,
-                leadingIcon = Icons.Filled.Email
+                leadingIcon = Icons.Filled.AccountBox
             )
             Spacer(modifier = Modifier.height(SpaceSmall))
             StandardTextField(
@@ -73,38 +81,47 @@ fun LoginScreen(
                 leadingIcon = Icons.Filled.Password
             )
             Spacer(modifier = Modifier.height(SpaceSmall))
+            StandardTextField(
+                text = viewModel.confirmPasswordText.value,
+                onValueChange = {
+                    viewModel.setConfirmPasswordText(it)
+                },
+                hint = stringResource(id = R.string.confirm_password_hint),
+                keyboardType = KeyboardType.Password,
+                leadingIcon = Icons.Filled.LockOpen
+            )
+            Spacer(modifier = Modifier.height(SpaceSmall))
             Button(
                 onClick = {
-                      navController.navigate(Screen.MainFeedScreen.route)
-                    // TODO: Navigate to Main Feed
+                    // TODO: Input user account info and navigate to Login Screen
                 },
                 modifier = Modifier
                     .align(Alignment.End)
             ) {
                 Text(
-                    text = stringResource(id = R.string.login),
+                    text = stringResource(id = R.string.register),
                     color = MaterialTheme.colors.onPrimary
                 )
             }
         }
         Text(
-            text = buildAnnotatedString { 
-                append(stringResource(id = R.string.dont_have_an_account_yet))
+            text = buildAnnotatedString {
+                append(stringResource(id = R.string.already_have_an_account))
                 append(" ")
-                val registerText = stringResource(id = R.string.register)
+                val loginText = stringResource(id = R.string.login)
                 withStyle(
                     style = SpanStyle(
                         color = MaterialTheme.colors.primary
                     )
                 ) {
-                    append(registerText)
+                    append(loginText)
                 }
             },
             style = MaterialTheme.typography.body1,
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .clickable {
-                    navController.navigate(Screen.RegisterScreen.route)
+                    navController.popBackStack()
                 }
         )
     }

@@ -44,9 +44,9 @@ fun SplashScreen(
                     }
                 )
             )
+            delay(Constants.SPLASH_SCREEN_DURATION)
+            navController.navigate(Screen.LoginScreen.route)
         }
-        delay(Constants.SPLASH_SCREEN_DURATION)
-        navController.navigate(Screen.LoginScreen.route)
     }
     Box(
         modifier = Modifier.fillMaxSize(),
