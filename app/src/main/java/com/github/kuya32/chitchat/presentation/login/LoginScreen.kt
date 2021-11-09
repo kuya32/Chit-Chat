@@ -75,6 +75,7 @@ fun LoginScreen(
             Spacer(modifier = Modifier.height(SpaceSmall))
             Button(
                 onClick = {
+                      navController.navigate(Screen.MainFeedScreen.route)
                     // TODO: Navigate to Main Feed
                 },
                 modifier = Modifier
