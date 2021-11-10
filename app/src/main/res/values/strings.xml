@@ -19,4 +19,8 @@
     <string name="liked_by_x_people">Liked by %d people</string>
     <string name="x_commented">%d commented</string>
     <string name="make_post">Make post</string>
+    <string name="home">Home</string>
+    <string name="message">Message</string>
+    <string name="activity">Activity</string>
+    <string name="profile">Profile</string>
 </resources>

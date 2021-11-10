@@ -1,4 +1,4 @@
-package com.github.kuya32.chitchat.presentation
+package com.github.kuya32.chitchat.presentation.main_feed
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.CircleShape
@@ -18,33 +18,7 @@ import com.github.kuya32.chitchat.R
 fun MainFeedScreen(
     navController: NavController
 ) {
-    Scaffold(
-        bottomBar = {
-            BottomAppBar(
-                modifier = Modifier.fillMaxWidth(),
-                backgroundColor = MaterialTheme.colors.surface,
-                cutoutShape = CircleShape,
-                elevation = 5.dp
-            ) {
 
-            }
-        },
-        floatingActionButton = {
-            FloatingActionButton(
-                backgroundColor = MaterialTheme.colors.primary,
-                onClick = { /*TODO*/ }
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = stringResource(id = R.string.make_post)
-                )
-            }
-        },
-        isFloatingActionButtonDocked = true,
-        floatingActionButtonPosition = FabPosition.Center
-    ) {
-        
-    }
     Post(
         post = com.github.kuya32.chitchat.domain.models.Post(
             username = "Marchael Acode",
