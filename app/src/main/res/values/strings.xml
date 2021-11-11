@@ -23,4 +23,6 @@
     <string name="message">Message</string>
     <string name="activity">Activity</string>
     <string name="profile">Profile</string>
+    <string name="string_password_visible_content_description">Password is shown</string>
+    <string name="string_password_hidden_content_description">Password is hidden</string>
 </resources>

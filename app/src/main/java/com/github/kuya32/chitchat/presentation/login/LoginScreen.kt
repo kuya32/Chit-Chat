@@ -58,8 +58,9 @@ fun LoginScreen(
                 onValueChange = {
                     viewModel.setUsernameText(it)
                 },
+                error = viewModel.usernameError.value,
                 hint = stringResource(id = R.string.username_email_hint),
-                keyboardType = KeyboardType.Text,
+                keyboardType = KeyboardType.Email,
                 leadingIcon = Icons.Filled.Email
             )
             Spacer(modifier = Modifier.height(SpaceSmall))
@@ -68,9 +69,14 @@ fun LoginScreen(
                 onValueChange = {
                     viewModel.setPasswordText(it)
                 },
+                error = viewModel.passwordError.value,
                 hint = stringResource(id = R.string.password_hint),
                 keyboardType = KeyboardType.Password,
-                leadingIcon = Icons.Filled.Password
+                leadingIcon = Icons.Filled.Password,
+                isPasswordVisible = viewModel.showPassword.value,
+                onPasswordToggleClick = {
+                    viewModel.setShowPassword(it)
+                }
             )
             Spacer(modifier = Modifier.height(SpaceSmall))
             Button(
