@@ -16,6 +16,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.github.kuya32.chitchat.presentation.ui.theme.HintGray
+import com.github.kuya32.chitchat.presentation.ui.theme.SpaceMedium
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceSmall
 
 @Composable
@@ -47,8 +48,6 @@ fun RowScope.StandardBottomNavItem(
         icon = {
             Box(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(SpaceSmall)
                     .drawBehind {
                         if (lineLength.value > 0f) {
                             drawLine(
@@ -68,7 +67,10 @@ fun RowScope.StandardBottomNavItem(
                         }
                     }
             ) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.padding(bottom = 2.dp)
+                ) {
                     if (badgeCount > 0) {
                         BadgedBox(
                             badge = {
@@ -96,7 +98,7 @@ fun RowScope.StandardBottomNavItem(
                                 text = name,
                                 color = MaterialTheme.colors.primary,
                                 textAlign = TextAlign.Center,
-                                fontSize = 10.sp
+                                fontSize = 10.sp,
                             )
                         }
                     }

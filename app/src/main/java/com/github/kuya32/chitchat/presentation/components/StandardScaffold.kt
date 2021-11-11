@@ -32,6 +32,11 @@ fun StandardScaffold(
             icon = Icons.Outlined.Message
         ),
         BottomNavItem(
+            name = "",
+            route = "",
+            icon = null
+        ),
+        BottomNavItem(
             name = stringResource(id = R.string.activity),
             route = Screen.ActivityScreen.route,
             icon = Icons.Outlined.Notifications
@@ -55,7 +60,7 @@ fun StandardScaffold(
                     elevation = 5.dp
                 ) {
                     BottomNavigation {
-                        bottomNavItems.forEachIndexed { i, bottomNavItem ->
+                        bottomNavItems.forEachIndexed { _, bottomNavItem ->
                             StandardBottomNavItem(
                                 icon = bottomNavItem.icon,
                                 name = bottomNavItem.name,
