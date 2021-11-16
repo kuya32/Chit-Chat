@@ -39,6 +39,8 @@ import com.github.kuya32.chitchat.utils.Constants
 @Composable
 fun Post(
     post: Post,
+    modifier: Modifier = Modifier,
+    onPostClick: () -> Unit = {}
 ) {
     Box(
         modifier = Modifier
@@ -52,6 +54,9 @@ fun Post(
                 .clip(MaterialTheme.shapes.medium)
                 .shadow(5.dp)
                 .background(MediumGray)
+                .clickable {
+                    onPostClick()
+                }
 
         ) {
             Image(

@@ -33,6 +33,7 @@ import com.github.kuya32.chitchat.presentation.components.StandardToolbar
 import com.github.kuya32.chitchat.presentation.ui.theme.*
 import com.github.kuya32.chitchat.presentation.utils.Screen
 import com.github.kuya32.chitchat.utils.Constants
+import org.w3c.dom.Comment
 
 @Composable
 fun PostDetailScreen(
@@ -177,4 +178,9 @@ fun PostDetailBox(
             )
         }
     }
+}
+
+@Composable
+fun Comment() {
+    
 }
