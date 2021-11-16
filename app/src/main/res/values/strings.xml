@@ -29,4 +29,6 @@
     <string name="your_feed">Your Feed</string>
     <string name="search">Search</string>
     <string name="users_post">%s\'s Post</string>
+    <string name="edit">Edit</string>
+    <string name="profile_picture">Profile picture</string>
 </resources>

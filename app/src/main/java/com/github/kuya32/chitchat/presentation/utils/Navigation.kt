@@ -10,6 +10,7 @@ import com.github.kuya32.chitchat.R
 import com.github.kuya32.chitchat.domain.models.Post
 import com.github.kuya32.chitchat.presentation.activity.ActivityScreen
 import com.github.kuya32.chitchat.presentation.create_post.CreatePostScreen
+import com.github.kuya32.chitchat.presentation.edit_post.EditPostScreen
 import com.github.kuya32.chitchat.presentation.main_feed.MainFeedScreen
 import com.github.kuya32.chitchat.presentation.login.LoginScreen
 import com.github.kuya32.chitchat.presentation.message.MessageScreen
@@ -25,7 +26,7 @@ fun Navigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.SplashScreen.route,
+        startDestination = Screen.PostDetailScreen.route,
         modifier = Modifier.fillMaxSize()
     ) {
         composable(Screen.SplashScreen.route) {
@@ -69,7 +70,7 @@ fun Navigation(
             )
         }
         composable(Screen.EditPostScreen.route) {
-            EditPostS
+            EditPostScreen(navController = navController)
         }
     }
 }
