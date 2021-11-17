@@ -26,7 +26,7 @@ fun Navigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.PostDetailScreen.route,
+        startDestination = Screen.ActivityScreen.route,
         modifier = Modifier.fillMaxSize()
     ) {
         composable(Screen.SplashScreen.route) {
@@ -71,6 +71,9 @@ fun Navigation(
         }
         composable(Screen.EditPostScreen.route) {
             EditPostScreen(navController = navController)
+        }
+        composable(Screen.ActivityScreen.route) {
+            ActivityScreen(navController = navController)
         }
     }
 }
