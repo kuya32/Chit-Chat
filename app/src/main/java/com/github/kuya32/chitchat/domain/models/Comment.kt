@@ -7,5 +7,5 @@ data class Comment(
     val timeStamp: Long = System.currentTimeMillis(),
     val comment: String = "",
     val isLiked: Boolean = false,
-    val likedCount: Int = 0
+    val likeCount: Int = 0
 )
