@@ -6,15 +6,19 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import com.github.kuya32.chitchat.R
+import com.github.kuya32.chitchat.domain.models.Post
 import com.github.kuya32.chitchat.presentation.activity.ActivityScreen
 import com.github.kuya32.chitchat.presentation.create_post.CreatePostScreen
+import com.github.kuya32.chitchat.presentation.edit_post.EditPostScreen
 import com.github.kuya32.chitchat.presentation.main_feed.MainFeedScreen
 import com.github.kuya32.chitchat.presentation.login.LoginScreen
 import com.github.kuya32.chitchat.presentation.message.MessageScreen
+import com.github.kuya32.chitchat.presentation.post_detail.PostDetailScreen
 import com.github.kuya32.chitchat.presentation.profile.ProfileScreen
 import com.github.kuya32.chitchat.presentation.register.RegisterScreen
 import com.github.kuya32.chitchat.presentation.splash.SplashScreen
+import com.github.kuya32.chitchat.presentation.search.SearchScreen
 
 @Composable
 fun Navigation(
@@ -22,7 +26,7 @@ fun Navigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.MainFeedScreen.route,
+        startDestination = Screen.PostDetailScreen.route,
         modifier = Modifier.fillMaxSize()
     ) {
         composable(Screen.SplashScreen.route) {
@@ -48,6 +52,25 @@ fun Navigation(
         }
         composable(Screen.ProfileScreen.route) {
             ProfileScreen(navController = navController)
+        }
+        composable(Screen.SearchScreen.route) {
+            SearchScreen(navController = navController)
+        }
+        composable(Screen.PostDetailScreen.route) {
+            PostDetailScreen(
+                navController = navController,
+                Post(
+                    username = "Marchael Acode",
+                    imageUrl = "",
+                    profileImageUrl = "",
+                    description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                    likeCount = 17,
+                    commentCount = 5
+                )
+            )
+        }
+        composable(Screen.EditPostScreen.route) {
+            EditPostScreen(navController = navController)
         }
     }
 }

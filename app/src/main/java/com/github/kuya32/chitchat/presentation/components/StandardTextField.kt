@@ -13,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
@@ -36,15 +37,11 @@ fun StandardTextField(
     maxLines: Int = 1,
     leadingIcon: ImageVector? = null,
     keyboardType: KeyboardType = KeyboardType.Text,
+    isPasswordToggleDisplayed: Boolean = keyboardType == KeyboardType.Password,
+    isPasswordVisible: Boolean = false,
+    onPasswordToggleClick: (Boolean) -> Unit = {},
     onValueChange: (String) -> Unit
 ) {
-    val isPasswordToggleDisplayed by remember {
-        mutableStateOf(keyboardType == KeyboardType.Password)
-    }
-    var isPasswordVisible by remember {
-        mutableStateOf(false)
-    }
-
     TextField(
         value = text,
         onValueChange = {
@@ -60,10 +57,10 @@ fun StandardTextField(
             )
         },
         isError = error != "",
-        visualTransformation = if (isPasswordToggleDisplayed && !isPasswordVisible) PasswordVisualTransformation() else VisualTransformation.None,
         keyboardOptions = KeyboardOptions(
             keyboardType = keyboardType
         ),
+        visualTransformation = if (isPasswordToggleDisplayed && !isPasswordVisible) PasswordVisualTransformation() else VisualTransformation.None,
         leadingIcon = if (leadingIcon != null) {
             val icon: @Composable () -> Unit = {
                 Icon(
@@ -75,30 +72,34 @@ fun StandardTextField(
             }
             icon
         } else null,
-        trailingIcon = {
-            if (isPasswordToggleDisplayed) {
-                var image: ImageVector? = null
-                if (isPasswordVisible) {
-                    image = Icons.Filled.Visibility
-                } else if (!isPasswordVisible) {
-                    image = Icons.Filled.VisibilityOff
-                }
-
+        trailingIcon = if (isPasswordToggleDisplayed) {
+            val icon: @Composable () -> Unit = {
                 IconButton(
                     onClick = {
-                    isPasswordVisible = !isPasswordVisible
+                        onPasswordToggleClick(!isPasswordVisible)
                     },
                     modifier = Modifier
-                        .semantics {
+                        .semantics { 
                             testTag = TestTags.PASSWORD_TOGGLE
                         }
                 ) {
-                    if (image != null) {
-                        Icon(imageVector = image, contentDescription = stringResource(id = R.string.password_visibility_icon))
-                    }
+                    Icon(
+                        imageVector = if (isPasswordVisible) {
+                            Icons.Filled.Visibility
+                        } else {
+                            Icons.Filled.VisibilityOff
+                        },
+                        tint = Color.White,
+                        contentDescription = if (isPasswordVisible) {
+                            stringResource(id = R.string.string_password_visible_content_description)
+                        } else {
+                            stringResource(id = R.string.string_password_hidden_content_description)
+                        }
+                    )
                 }
             }
-        },
+            icon
+        } else null,
         singleLine = true,
         modifier = Modifier
             .fillMaxWidth()

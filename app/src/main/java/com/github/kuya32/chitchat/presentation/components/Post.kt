@@ -39,7 +39,8 @@ import com.github.kuya32.chitchat.utils.Constants
 @Composable
 fun Post(
     post: Post,
-    profilePictureSize: Dp = 60.dp
+    modifier: Modifier = Modifier,
+    onPostClick: () -> Unit = {}
 ) {
     Box(
         modifier = Modifier
@@ -49,10 +50,13 @@ fun Post(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .offset(y = profilePictureSize / 2)
+                .offset(y = ProfilePictureSize / 2)
                 .clip(MaterialTheme.shapes.medium)
                 .shadow(5.dp)
                 .background(MediumGray)
+                .clickable {
+                    onPostClick()
+                }
 
         ) {
             Image(
@@ -137,7 +141,7 @@ fun Post(
             painter = painterResource(id = R.drawable.ic_ma),
             contentDescription = "Profile Picture",
             modifier = Modifier
-                .size(profilePictureSize)
+                .size(ProfilePictureSize)
                 .clip(CircleShape)
                 .align(Alignment.TopCenter)
         )
