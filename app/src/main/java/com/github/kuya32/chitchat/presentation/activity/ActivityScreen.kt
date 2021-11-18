@@ -51,8 +51,8 @@ fun ActivityScreen(
                 .background(MaterialTheme.colors.surface),
             contentPadding = PaddingValues(SpaceMedium)
         ) {
-            item {
-                for (i in 1..10) {
+            items(20) {
+                for (i in 1..5) {
                     if (i % 2 == 0) {
                         ActivityItem(
                             activity = Activity(
