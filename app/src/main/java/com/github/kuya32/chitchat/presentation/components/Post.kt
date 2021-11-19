@@ -1,9 +1,7 @@
 package com.github.kuya32.chitchat.presentation.components
 
-import android.widget.Space
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -50,7 +48,7 @@ fun Post(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .offset(y = ProfilePictureSize / 2)
+                .offset(y = MediumProfilePictureSize / 2)
                 .clip(MaterialTheme.shapes.medium)
                 .shadow(5.dp)
                 .background(MediumGray)
@@ -141,7 +139,7 @@ fun Post(
             painter = painterResource(id = R.drawable.ic_ma),
             contentDescription = "Profile Picture",
             modifier = Modifier
-                .size(ProfilePictureSize)
+                .size(MediumProfilePictureSize)
                 .clip(CircleShape)
                 .align(Alignment.TopCenter)
         )
