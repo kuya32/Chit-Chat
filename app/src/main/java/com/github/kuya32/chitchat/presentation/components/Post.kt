@@ -38,6 +38,7 @@ import com.github.kuya32.chitchat.utils.Constants
 fun Post(
     post: Post,
     modifier: Modifier = Modifier,
+    showProfileImage: Boolean = true,
     onPostClick: () -> Unit = {}
 ) {
     Box(
@@ -48,7 +49,9 @@ fun Post(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .offset(y = MediumProfilePictureSize / 2)
+                .offset(y = if (showProfileImage) {
+                    MediumProfilePictureSize / 2
+                } else 0.dp)
                 .clip(MaterialTheme.shapes.medium)
                 .shadow(5.dp)
                 .background(MediumGray)
@@ -135,14 +138,16 @@ fun Post(
                 )
             }
         }
-        Image(
-            painter = painterResource(id = R.drawable.ic_ma),
-            contentDescription = "Profile Picture",
-            modifier = Modifier
-                .size(MediumProfilePictureSize)
-                .clip(CircleShape)
-                .align(Alignment.TopCenter)
-        )
+        if (showProfileImage) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_ma),
+                contentDescription = "Profile Picture",
+                modifier = Modifier
+                    .size(MediumProfilePictureSize)
+                    .clip(CircleShape)
+                    .align(Alignment.TopCenter)
+            )
+        }
     }
 }
 

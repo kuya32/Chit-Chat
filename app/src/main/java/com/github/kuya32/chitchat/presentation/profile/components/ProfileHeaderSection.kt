@@ -33,27 +33,15 @@ fun ProfileHeaderSection(
 ) {
     Column(
         modifier = modifier
-            .fillMaxWidth()
-            .offset(y = -LargeProfilePictureSize / 2f),
+            .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.ic_ma),
-            contentDescription = stringResource(id = R.string.profile_picture),
-            modifier = Modifier
-                .size(LargeProfilePictureSize)
-                .clip(CircleShape)
-                .border(
-                    width = 1.dp,
-                    color = MaterialTheme.colors.onSurface,
-                    shape = CircleShape
-                )
-        )
-        Spacer(modifier = Modifier.height(SpaceSmall))
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .offset(x = (30.dp + SpaceSmall) / 2f)
+                .offset(x = if (isOwnProfile) {
+                    (30.dp + SpaceSmall) / 2f
+                } else 0.dp)
         ) {
             Text(
                 text = user.username,
@@ -90,13 +78,10 @@ fun ProfileHeaderSection(
                 bottom = SpaceLarge
             )
         )
-        Row(
-
-        ) {
-            ProfileStats(
-                user = user,
-                isOwnProfile = isOwnProfile
-            )
-        }
+        ProfileStats(
+            user = user,
+            isOwnProfile = isOwnProfile,
+            isFollowing = false
+        )
     }
 }

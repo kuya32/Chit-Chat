@@ -11,3 +11,7 @@ fun Dp.toPx(): Float {
         Resources.getSystem().displayMetrics
     )
 }
+
+fun Float.toDp(): Dp {
+    return (this / Resources.getSystem().displayMetrics.density).toDp()
+}
