@@ -51,17 +51,26 @@ fun ProfileScreen(
         mutableStateOf(0f)
     }
     val toolbarHeightCollapsed = 56.dp
+    val imageCollapseOffsetY = remember {
+        (toolbarHeightCollapsed - LargeProfilePictureSize / 2f) / 2f
+    }
     val bannerHeight = (LocalConfiguration.current.screenWidthDp / 2.5f).dp
     val toolbarHeightExpanded = remember {
         bannerHeight + LargeProfilePictureSize
+    }
+    val maxOffset = remember {
+        toolbarHeightExpanded - toolbarHeightCollapsed
     }
     val nestedScrollConnection = remember {
         object : NestedScrollConnection {
             override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
                 val delta = available.y
+                if (delta > 0f && lazyListState.firstVisibleItemIndex != 0) {
+                    return Offset.Zero
+                }
                 val newOffset = toolbarOffsetY + delta
 
-                return super.onPreScroll(available, source)
+                return Offset.Zero
             }
         }
     }
