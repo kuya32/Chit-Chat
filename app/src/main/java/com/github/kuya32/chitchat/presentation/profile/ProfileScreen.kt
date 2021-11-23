@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
@@ -28,6 +29,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.github.kuya32.chitchat.R
 import com.github.kuya32.chitchat.domain.models.Post
@@ -40,17 +42,17 @@ import com.github.kuya32.chitchat.presentation.ui.theme.LargeProfilePictureSize
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceMedium
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceSmall
 import com.github.kuya32.chitchat.presentation.utils.Screen
+import com.github.kuya32.chitchat.presentation.utils.toPx
 
 @Composable
 fun ProfileScreen(
-    navController: NavController
+    navController: NavController,
+    viewModel: ProfileViewModel = hiltViewModel()
 ) {
     val lazyListState = rememberLazyListState()
+    val toolbarState = viewModel.toolbarState.value
 
-    val toolbarOffsetY by remember {
-        mutableStateOf(0f)
-    }
-    val toolbarHeightCollapsed = 56.dp
+    val toolbarHeightCollapsed = 75.dp
     val imageCollapseOffsetY = remember {
         (toolbarHeightCollapsed - LargeProfilePictureSize / 2f) / 2f
     }
@@ -68,8 +70,12 @@ fun ProfileScreen(
                 if (delta > 0f && lazyListState.firstVisibleItemIndex != 0) {
                     return Offset.Zero
                 }
-                val newOffset = toolbarOffsetY + delta
-
+                val newOffset = viewModel.toolbarState.value.toolbarOffsetY + delta
+                viewModel.setToolbarOffsetY(newOffset.coerceIn(
+                    minimumValue = -maxOffset.toPx(),
+                    maximumValue = 0f
+                ))
+                viewModel.setExpandedRatio((viewModel.toolbarState.value.toolbarOffsetY + maxOffset.toPx()) / maxOffset.toPx())
                 return Offset.Zero
             }
         }
@@ -85,24 +91,9 @@ fun ProfileScreen(
         ) {
             item {
                 Spacer(modifier = Modifier.height(
-                    toolbarHeightExpanded - LargeProfilePictureSize / 2f
+                    toolbarHeightExpanded - LargeProfilePictureSize / 20f
                 ))
             }
-//            item {
-//                StandardToolbar(
-//                    navController = navController,
-//                    title = {
-//                        Text(
-//                            text = stringResource(
-//                                id = R.string.your_profile,
-//                            ),
-//                            fontWeight = FontWeight.Bold,
-//                            color = MaterialTheme.colors.onBackground
-//                        )
-//                    },
-//                    modifier = Modifier.fillMaxWidth()
-//                )
-//            }
             item {
                 ProfileHeaderSection(
                     user = User(
@@ -141,9 +132,25 @@ fun ProfileScreen(
             modifier = Modifier
                 .align(Alignment.TopCenter)
         ) {
+            StandardToolbar(
+                    navController = navController,
+                    title = {
+                        Text(
+                            text = stringResource(
+                                id = R.string.your_profile,
+                            ),
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colors.onBackground
+                        )
+                    },
+                    modifier = Modifier.fillMaxWidth()
+            )
             BannerSection(
                 modifier = Modifier
-                    .height(bannerHeight)
+                    .height((bannerHeight * toolbarState.expandedRation).coerceIn(
+                        minimumValue = toolbarHeightCollapsed,
+                        maximumValue = bannerHeight
+                    )),
             )
             Image(
                 painter = painterResource(id = R.drawable.ic_ma),
@@ -151,7 +158,14 @@ fun ProfileScreen(
                 modifier = Modifier
                     .align(CenterHorizontally)
                     .graphicsLayer {
-                        translationY = -LargeProfilePictureSize.toPx() / 2f
+                        translationY = -LargeProfilePictureSize.toPx() / 2f - (1f - toolbarState.expandedRation) * imageCollapseOffsetY.toPx()
+                        transformOrigin = TransformOrigin(
+                            pivotFractionX = 0.5f,
+                            pivotFractionY = 0f
+                        )
+                        val scale = 0.5f + toolbarState.expandedRation * 0.5f
+                        scaleX = scale
+                        scaleY = scale
                     }
                     .size(LargeProfilePictureSize)
                     .clip(CircleShape)
