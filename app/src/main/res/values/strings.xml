@@ -44,4 +44,11 @@
     <string name="posts">Posts</string>
     <string name="unfollow">Unfollow</string>
     <string name="follow">Follow</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="confirm">Confirm</string>
+    <string name="edit_banner">Edit banner</string>
+    <string name="instagram_hint">Instagram profile URL</string>
+    <string name="linkedIn_hint">LinkedIn profile URL</string>
+    <string name="github_hint">Github profile URL</string>
+    <string name="bio_hint">Bio</string>
 </resources>

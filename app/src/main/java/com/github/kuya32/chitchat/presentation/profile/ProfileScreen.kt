@@ -104,7 +104,10 @@ fun ProfileScreen(
                         followingCount = 2,
                         postCount = 1
                     ),
-                    isOwnProfile = false
+                    isOwnProfile = true,
+                    onEditClick = {
+                        navController.navigate(Screen.EditProfileScreen.route)
+                    }
                 )
             }
             item {

@@ -11,6 +11,7 @@ import com.github.kuya32.chitchat.domain.models.Post
 import com.github.kuya32.chitchat.presentation.activity.ActivityScreen
 import com.github.kuya32.chitchat.presentation.create_post.CreatePostScreen
 import com.github.kuya32.chitchat.presentation.edit_post.EditPostScreen
+import com.github.kuya32.chitchat.presentation.edit_profile.EditProfileScreen
 import com.github.kuya32.chitchat.presentation.main_feed.MainFeedScreen
 import com.github.kuya32.chitchat.presentation.login.LoginScreen
 import com.github.kuya32.chitchat.presentation.message.MessageScreen
@@ -74,6 +75,9 @@ fun Navigation(
         }
         composable(Screen.ActivityScreen.route) {
             ActivityScreen(navController = navController)
+        }
+        composable(Screen.EditProfileScreen.route) {
+            EditProfileScreen(navController = navController)
         }
     }
 }
