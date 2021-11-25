@@ -1,9 +1,6 @@
 package com.github.kuya32.chitchat.presentation.edit_profile
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
@@ -12,17 +9,22 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.Dp
@@ -33,15 +35,13 @@ import com.github.kuya32.chitchat.R
 import com.github.kuya32.chitchat.presentation.components.StandardTextField
 import com.github.kuya32.chitchat.presentation.components.StandardToolbar
 import com.github.kuya32.chitchat.presentation.ui.theme.*
+import com.github.kuya32.chitchat.presentation.utils.states.StandardTextFieldState
 import com.github.kuya32.chitchat.presentation.utils.toPx
 
 @Composable
 fun EditProfileScreen(
     navController: NavController,
-    iconSize: Dp = 45.dp,
     onConfirmClick: () -> Unit = {},
-    onEditBannerClick: () -> Unit = {},
-    onEditProfileImageClick: () -> Unit = {},
     viewModel: EditProfileViewModel = hiltViewModel()
 ) {
     Column(
@@ -73,60 +73,157 @@ fun EditProfileScreen(
                 }
             }
         )
-        BoxWithConstraints(
+        Column(
             modifier = Modifier
-                .height((LocalConfiguration.current.screenWidthDp / 2.5f).dp)
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.ic_edc),
-                contentDescription = stringResource(id = R.string.edc_las_vegas),
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .clickable {
-                        onEditProfileImageClick()
-                    }
+            BannerEditSection(
+                bannerImage = painterResource(id = R.drawable.ic_edc),
+                profileImage = painterResource(id = R.drawable.ic_ma),
             )
-            Box(
+            Column(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .background(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(
-                                Color.Transparent,
-                                Color.Black
-                            ),
-                            startY = constraints.maxHeight - iconSize.toPx() * 2f
-                        )
+                    .padding(
+                        start = SpaceXXLarge,
+                        end = SpaceXXLarge,
+                    )
+                    .offset(
+                        y = LargeProfilePictureSize / 2f
                     )
             ) {
-                IconButton(
-                    onClick = {
-                        onEditBannerClick()
+                Spacer(modifier = Modifier.height(SpaceMedium))
+                StandardTextField(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = viewModel.usernameState.value.text,
+                    onValueChange = {
+                        viewModel.setUsernameState(
+                            StandardTextFieldState(text = it)
+                        )
                     },
+                    error = viewModel.usernameState.value.error,
+                    hint = stringResource(id = R.string.username_hint),
+                    leadingIcon = Icons.Default.Person,
+                    keyboardType = KeyboardType.Text
+                )
+                Spacer(modifier = Modifier.height(SpaceMedium))
+                StandardTextField(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = viewModel.instagramState.value.text,
+                    onValueChange = {
+                        viewModel.setInstagramState(
+                            StandardTextFieldState(text = it)
+                        )
+                    },
+                    error = viewModel.instagramState.value.error,
+                    hint = stringResource(id = R.string.instagram_hint),
+                    leadingIcon = ImageVector.vectorResource(id = R.drawable.ic_insta_icon),
+                    keyboardType = KeyboardType.Text
+                )
+                Spacer(modifier = Modifier.height(SpaceMedium))
+                StandardTextField(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = viewModel.linkedInState.value.text,
+                    onValueChange = {
+                        viewModel.setLinkedInState(
+                            StandardTextFieldState(text = it)
+                        )
+                    },
+                    error = viewModel.linkedInState.value.error,
+                    hint = stringResource(id = R.string.linkedIn_hint),
+                    leadingIcon = ImageVector.vectorResource(id = R.drawable.ic_linkedin_icon),
+                    keyboardType = KeyboardType.Text
+                )
+                Spacer(modifier = Modifier.height(SpaceMedium))
+                StandardTextField(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = viewModel.githubState.value.text,
+                    onValueChange = {
+                        viewModel.setGithubState(
+                            StandardTextFieldState(text = it)
+                        )
+                    },
+                    error = viewModel.githubState.value.error,
+                    hint = stringResource(id = R.string.github_hint),
+                    leadingIcon = ImageVector.vectorResource(id = R.drawable.ic_github_icon),
+                    keyboardType = KeyboardType.Text
+                )
+                Spacer(modifier = Modifier.height(SpaceMedium))
+                StandardTextField(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = viewModel.bioState.value.text,
+                    onValueChange = {
+                        viewModel.setBioState(
+                            StandardTextFieldState(text = it)
+                        )
+                    },
+                    error = viewModel.bioState.value.error,
+                    hint = stringResource(id = R.string.bio_hint),
+                    keyboardType = KeyboardType.Text
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun BannerEditSection(
+    bannerImage: Painter,
+    profileImage: Painter,
+    iconSize: Dp = 45.dp,
+    onEditBannerClick: () -> Unit = {},
+    onEditProfileImageClick: () -> Unit = {}
+) {
+    BoxWithConstraints(
+        modifier = Modifier
+            .height((LocalConfiguration.current.screenWidthDp / 2.5f).dp)
+    ) {
+        Image(
+            painter = bannerImage,
+            contentDescription = stringResource(id = R.string.edc_las_vegas),
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .fillMaxSize()
+                .clickable {
+                    onEditProfileImageClick()
+                }
+        )
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    brush = Brush.verticalGradient(
+                        colors = listOf(
+                            Color.Transparent,
+                            Color.Black
+                        ),
+                        startY = constraints.maxHeight - iconSize.toPx() * 2f
+                    )
+                )
+        ) {
+            IconButton(
+                onClick = {
+                    onEditBannerClick()
+                },
+                modifier = Modifier
+                    .size(iconSize)
+                    .align(Alignment.BottomEnd)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_edit_banner),
+                    contentDescription = stringResource(id = R.string.edit_banner),
                     modifier = Modifier
                         .size(iconSize)
-                        .align(Alignment.BottomEnd)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.ic_edit_banner),
-                        contentDescription = stringResource(id = R.string.edit_banner),
-                        modifier = Modifier
-                            .size(iconSize)
-                            .padding(SpaceSmall)
-                    )
-                }
+                        .padding(SpaceSmall)
+                )
             }
-
         }
         Image(
-            painter = painterResource(id = R.drawable.ic_ma),
+            painter = profileImage,
             contentDescription = stringResource(id = R.string.profile_picture),
             modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .graphicsLayer {
-                    translationY = -LargeProfilePictureSize.toPx() / 2f
-                }
+                .offset(y = LargeProfilePictureSize / 2f)
+                .align(Alignment.BottomCenter)
                 .size(LargeProfilePictureSize)
                 .clip(CircleShape)
                 .border(
@@ -134,67 +231,8 @@ fun EditProfileScreen(
                     color = MaterialTheme.colors.onSurface,
                     shape = CircleShape
                 )
+
         )
-        Column(
-            modifier = Modifier
-                .padding(
-                    start = SpaceXXLarge,
-                    end = SpaceXXLarge,
-                )
-                .offset(
-                    y = -LargeProfilePictureSize / 2f
-                )
-        ) {
-            Spacer(modifier = Modifier.height(SpaceMedium))
-            StandardTextField(
-                text = viewModel.usernameText.value,
-                onValueChange = {
-                    viewModel.setUsernameText(it)
-                },
-                error = viewModel.usernameError.value,
-                hint = stringResource(id = R.string.username_hint),
-                keyboardType = KeyboardType.Text
-            )
-            Spacer(modifier = Modifier.height(SpaceMedium))
-            StandardTextField(
-                text = viewModel.instagramText.value,
-                onValueChange = {
-                    viewModel.setInstagramText(it)
-                },
-                error = viewModel.instagramText.value,
-                hint = stringResource(id = R.string.instagram_hint),
-                keyboardType = KeyboardType.Text
-            )
-            Spacer(modifier = Modifier.height(SpaceMedium))
-            StandardTextField(
-                text = viewModel.linkedInText.value,
-                onValueChange = {
-                    viewModel.setLinkedInText(it)
-                },
-                error = viewModel.linkedInText.value,
-                hint = stringResource(id = R.string.linkedIn_hint),
-                keyboardType = KeyboardType.Text
-            )
-            Spacer(modifier = Modifier.height(SpaceMedium))
-            StandardTextField(
-                text = viewModel.githubText.value,
-                onValueChange = {
-                    viewModel.setGithubText(it)
-                },
-                error = viewModel.githubText.value,
-                hint = stringResource(id = R.string.github_hint),
-                keyboardType = KeyboardType.Text
-            )
-            Spacer(modifier = Modifier.height(SpaceMedium))
-            StandardTextField(
-                text = viewModel.bioText.value,
-                onValueChange = {
-                    viewModel.setBioText(it)
-                },
-                error = viewModel.bioText.value,
-                hint = stringResource(id = R.string.bio_hint),
-                keyboardType = KeyboardType.Text
-            )
-        }
     }
+
 }
