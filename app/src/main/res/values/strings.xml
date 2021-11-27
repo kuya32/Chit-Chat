@@ -51,4 +51,7 @@
     <string name="linkedIn_hint">LinkedIn profile URL</string>
     <string name="github_hint">Github profile URL</string>
     <string name="bio_hint">Bio</string>
+    <string name="select_top_three_skills">Select your top three skills:</string>
+    <string name="add_user">Add User</string>
+    <string name="search_for_users">Search for users</string>
 </resources>

@@ -8,8 +8,7 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,6 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -34,9 +34,13 @@ import androidx.navigation.NavController
 import com.github.kuya32.chitchat.R
 import com.github.kuya32.chitchat.presentation.components.StandardTextField
 import com.github.kuya32.chitchat.presentation.components.StandardToolbar
+import com.github.kuya32.chitchat.presentation.edit_profile.components.Chip
 import com.github.kuya32.chitchat.presentation.ui.theme.*
 import com.github.kuya32.chitchat.presentation.utils.states.StandardTextFieldState
 import com.github.kuya32.chitchat.presentation.utils.toPx
+import com.google.accompanist.flowlayout.FlowRow
+import com.google.accompanist.flowlayout.MainAxisAlignment
+import kotlin.random.Random
 
 @Composable
 fun EditProfileScreen(
@@ -77,19 +81,18 @@ fun EditProfileScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
+                .padding(SpaceMedium)
         ) {
             BannerEditSection(
                 bannerImage = painterResource(id = R.drawable.ic_edc),
                 profileImage = painterResource(id = R.drawable.ic_ma),
             )
+            Spacer(modifier = Modifier.height(LargeProfilePictureSize / 2f))
             Column(
                 modifier = Modifier
                     .padding(
                         start = SpaceXXLarge,
                         end = SpaceXXLarge,
-                    )
-                    .offset(
-                        y = LargeProfilePictureSize / 2f
                     )
             ) {
                 Spacer(modifier = Modifier.height(SpaceMedium))
@@ -157,10 +160,53 @@ fun EditProfileScreen(
                             StandardTextFieldState(text = it)
                         )
                     },
+                    maxLines = 3,
                     error = viewModel.bioState.value.error,
                     hint = stringResource(id = R.string.bio_hint),
+                    leadingIcon = Icons.Default.Description,
                     keyboardType = KeyboardType.Text
                 )
+            }
+            Column(
+                modifier = Modifier
+                    .padding(
+                        start = SpaceXXLarge,
+                        end = SpaceXXLarge,
+                    )
+            ) {
+                Spacer(modifier = Modifier.height(SpaceMedium))
+                Text(
+                    text = stringResource(id = R.string.select_top_three_skills),
+                    style = MaterialTheme.typography.h2,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                )
+                Spacer(modifier = Modifier.height(SpaceMedium))
+                FlowRow(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    mainAxisAlignment = MainAxisAlignment.Center,
+                    mainAxisSpacing = SpaceSmall,
+                    crossAxisSpacing = SpaceSmall
+                ) {
+                    listOf(
+                        "Kotlin",
+                        "Javascript",
+                        "Java",
+                        "C",
+                        "C++",
+                        "C#",
+                        "Python",
+                        "Dart"
+                    ).forEach {
+                        Chip(
+                            text = it,
+                            selected = Random.nextInt(2) == 0
+                        ) {
+
+                        }
+                    }
+                }
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.github.kuya32.chitchat.presentation.utils
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -21,13 +22,14 @@ import com.github.kuya32.chitchat.presentation.register.RegisterScreen
 import com.github.kuya32.chitchat.presentation.splash.SplashScreen
 import com.github.kuya32.chitchat.presentation.search.SearchScreen
 
+@ExperimentalMaterialApi
 @Composable
 fun Navigation(
     navController: NavHostController
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.ProfileScreen.route,
+        startDestination = Screen.SearchScreen.route,
         modifier = Modifier.fillMaxSize()
     ) {
         composable(Screen.SplashScreen.route) {
