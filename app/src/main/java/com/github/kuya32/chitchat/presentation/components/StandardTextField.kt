@@ -101,7 +101,7 @@ fun StandardTextField(
             icon
         } else null,
         singleLine = true,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .semantics {
                 testTag = TestTags.STANDARD_TEXT_FIELD

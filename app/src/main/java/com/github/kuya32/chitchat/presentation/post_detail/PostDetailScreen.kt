@@ -1,6 +1,5 @@
 package com.github.kuya32.chitchat.presentation.post_detail
 
-import android.widget.Space
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -17,14 +16,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
@@ -92,7 +89,7 @@ fun PostDetailScreen(
                         Column(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .offset(y = ProfilePictureSize / 2)
+                                .offset(y = MediumProfilePictureSize / 2)
                                 .shadow(5.dp)
 
                         ) {
@@ -105,7 +102,7 @@ fun PostDetailScreen(
                             painter = painterResource(id = R.drawable.ic_ma),
                             contentDescription = stringResource(id = R.string.profile_picture),
                             modifier = Modifier
-                                .size(ProfilePictureSize)
+                                .size(MediumProfilePictureSize)
                                 .clip(CircleShape)
                                 .align(Alignment.TopCenter)
                         )
