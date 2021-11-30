@@ -30,7 +30,7 @@ import com.github.kuya32.chitchat.presentation.ui.theme.*
 fun UserProfileItem(
     modifier: Modifier = Modifier,
     user: User,
-    actionItem: @Composable () -> Unit = {},
+    actionIcon: @Composable () -> Unit = {},
     onItemClick: () -> Unit = {},
     onActionItemClick: () -> Unit = {},
 ) {
@@ -41,16 +41,16 @@ fun UserProfileItem(
         elevation = 5.dp
     ) {
         Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxSize()
                 .padding(
                     start = SpaceSmall,
                     end = SpaceSmall,
                     top = SpaceMedium,
                     bottom = SpaceMedium
                 ),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_ma),
@@ -60,11 +60,12 @@ fun UserProfileItem(
                     .padding(start = SpaceSmall, end = SpaceSmall)
                     .size(MediumProfilePictureSize)
                     .clip(CircleShape)
-
             )
             Column(
                 modifier = Modifier
-                    .width(intrinsicSize = IntrinsicSize.Min)
+                    .fillMaxHeight()
+                    .fillMaxWidth(0.8f)
+                    .padding(horizontal = SpaceSmall)
             ) {
                 Text(
                     text = user.username,
@@ -87,15 +88,11 @@ fun UserProfileItem(
                 },
                 modifier = Modifier
                     .size(70.dp)
-                    .padding(start = SpaceMedium, end = SpaceMedium)
+                    .padding(start = SpaceSmall, end = SpaceSmall)
             ) {
-                Icon(
-                    imageVector = Icons.Filled.PersonAdd,
-                    contentDescription = stringResource(id = R.string.add_user),
-                    tint = Color.White,
-                    modifier = Modifier.size(45.dp)
-                )
+                actionIcon()
             }
         }
+
     }
 }
