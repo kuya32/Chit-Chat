@@ -57,4 +57,6 @@
     <string name="create_a_post">Create a new post</string>
     <string name="choose_image">Choose image</string>
     <string name="description_hint">Description</string>
+    <string name="post">Post</string>
+    <string name="send_image">Send Image</string>
 </resources>

@@ -3,14 +3,12 @@ package com.github.kuya32.chitchat.presentation.create_post
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Description
+import androidx.compose.material.icons.filled.Send
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -50,33 +48,34 @@ fun CreatePostScreen(
             },
             showBackArrow = true,
             modifier = Modifier.fillMaxWidth(),
-            navActions = {
-                IconButton(onClick = {
-                    onConfirmClick()
-                }) {
-                    Icon(
-                        imageVector = Icons.Default.Check,
-                        contentDescription = stringResource(id = R.string.confirm),
-                        tint = MaterialTheme.colors.onBackground
-                    )
-                }
-            }
+//            navActions = {
+//                IconButton(onClick = {
+//                    onConfirmClick()
+//                }) {
+//                    Icon(
+//                        imageVector = Icons.Default.Check,
+//                        contentDescription = stringResource(id = R.string.confirm),
+//                        tint = MaterialTheme.colors.onBackground
+//                    )
+//                }
+//            }
         )
         Column(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(SpaceMedium)
         ) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .fillMaxHeight(0.40f)
-                    .padding(SpaceMedium)
                     .border(
                         width = 1.dp,
                         color = MaterialTheme.colors.onBackground,
                         shape = MaterialTheme.shapes.medium
                     )
                     .clickable {
-                       // TODO: Add function for user to add photo to new post
+                        // TODO: Add function for user to add photo to new post
                     },
                 contentAlignment = Alignment.Center
             ) {
@@ -89,11 +88,7 @@ fun CreatePostScreen(
             Spacer(modifier = Modifier.height(SpaceMedium))
             StandardTextField(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        start = SpaceMedium,
-                        end = SpaceMedium
-                    ),
+                    .fillMaxWidth(),
                 text = viewModel.postDescriptionState.value.text,
                 onValueChange = {
                     viewModel.setPostDescriptionState(
@@ -105,6 +100,24 @@ fun CreatePostScreen(
                 hint = stringResource(id = R.string.description_hint),
                 keyboardType = KeyboardType.Text
             )
+            Spacer(modifier = Modifier.height(SpaceSmall))
+            Button(
+                onClick = {
+                    // TODO: Confirms and creates a new post
+                },
+                modifier = Modifier.align(Alignment.End)
+            ) {
+                Text(
+                    text = stringResource(id = R.string.post),
+                    color = MaterialTheme.colors.onPrimary,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(end = SpaceSmall)
+                )
+                Icon(
+                    imageVector = Icons.Default.Send,
+                    contentDescription = stringResource(id = R.string.send_image)
+                )
+            }
         }
     }
 }
