@@ -54,4 +54,5 @@
     <string name="select_top_three_skills">Select your top three skills:</string>
     <string name="add_user">Add User</string>
     <string name="search_for_users">Search for users</string>
+    <string name="create_a_post">Create a new post</string>
 </resources>
