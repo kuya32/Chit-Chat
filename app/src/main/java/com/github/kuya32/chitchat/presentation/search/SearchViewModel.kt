@@ -12,14 +12,11 @@ class SearchViewModel @Inject constructor(
 
 ): ViewModel() {
 
-    val string = "12:01:00PM"
-
     private val _searchState = mutableStateOf(StandardTextFieldState())
     val searchState: State<StandardTextFieldState> = _searchState
 
     fun setSearchState(state: StandardTextFieldState) {
         _searchState.value = state
     }
-
 
 }

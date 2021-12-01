@@ -55,4 +55,6 @@
     <string name="add_user">Add User</string>
     <string name="search_for_users">Search for users</string>
     <string name="create_a_post">Create a new post</string>
+    <string name="choose_image">Choose image</string>
+    <string name="description_hint">Description</string>
 </resources>
