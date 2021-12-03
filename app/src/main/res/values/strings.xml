@@ -59,4 +59,5 @@
     <string name="description_hint">Description</string>
     <string name="post">Post</string>
     <string name="send_image">Send Image</string>
+    <string name="liked_by">Liked by</string>
 </resources>
