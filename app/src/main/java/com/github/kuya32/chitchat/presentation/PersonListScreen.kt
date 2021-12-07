@@ -1,38 +1,29 @@
 package com.github.kuya32.chitchat.presentation
 
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.PersonAdd
-import androidx.compose.material.icons.filled.Send
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.github.kuya32.chitchat.R
 import com.github.kuya32.chitchat.domain.models.User
-import com.github.kuya32.chitchat.presentation.components.StandardTextField
 import com.github.kuya32.chitchat.presentation.components.StandardToolbar
 import com.github.kuya32.chitchat.presentation.components.UserProfileItem
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceMedium
-import com.github.kuya32.chitchat.presentation.ui.theme.SpaceSmall
-import com.github.kuya32.chitchat.presentation.utils.states.StandardTextFieldState
+
 
 @ExperimentalMaterialApi
 @Composable
 fun PersonListScreen(
-    navController: NavController,
-
-) {
+    navController: NavController
+    ) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {

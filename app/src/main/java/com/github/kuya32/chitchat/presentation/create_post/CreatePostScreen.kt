@@ -35,6 +35,8 @@ fun CreatePostScreen(
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
+        viewModel.pickingNumbers(viewModel.array)
+
         StandardToolbar(
             navController = navController,
             title = {
