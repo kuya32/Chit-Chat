@@ -13,7 +13,7 @@ class CreatedPostViewModel @Inject constructor(
 
 ): ViewModel() {
 
-    val array: Array<Int> = arrayOf(1, 2, 2, 3, 1, 2)
+    val array: Array<Int> = arrayOf(1, 3, 1, 3, 1, 4, 1, 3, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 7)
 
     private val _postDescriptionState = mutableStateOf(StandardTextFieldState())
     val postDescriptionState: State<StandardTextFieldState> = _postDescriptionState
@@ -22,20 +22,16 @@ class CreatedPostViewModel @Inject constructor(
         _postDescriptionState.value = state
     }
 
-    fun pickingNumbers(a: Array<Int>): Int {
+    fun beautifulDays(i: Int, j: Int, k: Int): Int {
         // Write your code here
-        val map = HashMap<Int, Int>()
-        a.forEach {num ->
-            if (map.containsKey(num)) {
-                map.get(num)?.plus(1)?.let { map.put(num, it) }
-            } else {
-                map.put(num, 1)
+        var ba = 0
+        for (num in i..j) {
+            var reverse = num.toString().reversed().toInt()
+            if (Math.abs(num - reverse) % k == 0) {
+                ba++
             }
         }
-        val max = map.maxOf { it.key }
-        if (map.containsKey(max + 1)) {
-            map.get(max + 1)
-        }
-        return 0
+        return ba
     }
+
 }
