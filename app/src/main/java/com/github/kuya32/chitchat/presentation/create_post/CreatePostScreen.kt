@@ -35,7 +35,7 @@ fun CreatePostScreen(
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        viewModel.beautifulDays(20, 23, 6)
+        viewModel.findDigits(100)
 
         StandardToolbar(
             navController = navController,

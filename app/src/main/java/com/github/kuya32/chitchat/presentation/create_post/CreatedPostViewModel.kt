@@ -13,7 +13,8 @@ class CreatedPostViewModel @Inject constructor(
 
 ): ViewModel() {
 
-    val array: Array<Int> = arrayOf(1, 3, 1, 3, 1, 4, 1, 3, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 7)
+    val array: Array<Int> = arrayOf(0, 0, 1, 0, 0, 1, 1, 0)
+
 
     private val _postDescriptionState = mutableStateOf(StandardTextFieldState())
     val postDescriptionState: State<StandardTextFieldState> = _postDescriptionState
@@ -22,16 +23,20 @@ class CreatedPostViewModel @Inject constructor(
         _postDescriptionState.value = state
     }
 
-    fun beautifulDays(i: Int, j: Int, k: Int): Int {
+    fun findDigits(n: Int): Int {
         // Write your code here
-        var ba = 0
-        for (num in i..j) {
-            var reverse = num.toString().reversed().toInt()
-            if (Math.abs(num - reverse) % k == 0) {
-                ba++
+        var count = 0
+        val string = n.toString()
+        for (i in string) {
+            if (i.digitToInt() % n == 0) {
+                count++
             }
         }
-        return ba
+        println(count)
+        return count
     }
+
+
+
 
 }
