@@ -35,8 +35,6 @@ fun CreatePostScreen(
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        viewModel.findDigits(100)
-
         StandardToolbar(
             navController = navController,
             title = {
@@ -97,6 +95,7 @@ fun CreatePostScreen(
                         StandardTextFieldState(text = it)
                     )
                 },
+                singleLine = false,
                 maxLines = 3,
                 error = viewModel.postDescriptionState.value.error,
                 hint = stringResource(id = R.string.description_hint),
