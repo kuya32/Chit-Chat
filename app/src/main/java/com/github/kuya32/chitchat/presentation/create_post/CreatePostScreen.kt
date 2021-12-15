@@ -35,6 +35,7 @@ fun CreatePostScreen(
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
+        viewModel.jumpingOnClouds(viewModel.array)
         StandardToolbar(
             navController = navController,
             title = {
