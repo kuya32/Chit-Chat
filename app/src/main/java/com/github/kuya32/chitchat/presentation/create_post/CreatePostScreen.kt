@@ -32,10 +32,10 @@ fun CreatePostScreen(
     onConfirmClick: () -> Unit = {},
     viewModel: CreatedPostViewModel = hiltViewModel()
 ) {
+    viewModel.taumBday(27984, 1402, 619246, 615589, 247954)
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        viewModel.jumpingOnClouds(viewModel.array)
         StandardToolbar(
             navController = navController,
             title = {

@@ -9,6 +9,9 @@ import javax.inject.Inject
 @HiltViewModel
 class RegisterViewModel @Inject constructor() : ViewModel() {
 
+    private val _state = mutableStateOf(RegisterState())
+    val state: State<RegisterState> = _state
+
     private val _emailText = mutableStateOf("")
     val emailText: State<String> = _emailText
 

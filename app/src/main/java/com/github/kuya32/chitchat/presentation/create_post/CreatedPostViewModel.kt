@@ -15,8 +15,6 @@ class CreatedPostViewModel @Inject constructor(
 
 ): ViewModel() {
 
-    val array: Array<Int> = arrayOf(0, 0, 1, 0, 0, 1, 0)
-
     private val _postDescriptionState = mutableStateOf(StandardTextFieldState())
     val postDescriptionState: State<StandardTextFieldState> = _postDescriptionState
 
@@ -24,21 +22,19 @@ class CreatedPostViewModel @Inject constructor(
         _postDescriptionState.value = state
     }
 
-    fun equalizeArray(arr: Array<Int>): Int {
+    fun taumBday(b: Int, w: Int, bc: Int, wc: Int, z: Int): Long {
         // Write your code here
-        var max = 1
-        val map = HashMap<Int, Int>()
-        arr.forEach { num ->
-            if (!map.containsKey(num)) {
-                map.put(num, 1)
-            } else {
-                map.get(num)?.plus(1)?.let { map.put(num, it) }
-                if (max < map.get(num)!!) {
-                    max = map.get(num)!!
-                }
-            }
+        var total: Long = 0
+        var gifts = (b + w).toLong()
+        if (bc > wc + z) {
+            total = ((gifts * wc) + (b * z)).toLong()
+        } else if (wc > bc + z) {
+            total = ((gifts * bc) + (w * z)).toLong()
+        } else {
+            total = (b * bc) + (w * wc).toLong()
         }
-        return arr.size - max
+        println(total)
+        return total
     }
 
 
