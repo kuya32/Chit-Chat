@@ -3,6 +3,7 @@ package com.github.kuya32.chitchat.presentation.register
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import com.github.kuya32.chitchat.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -12,31 +13,36 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
     private val _state = mutableStateOf(RegisterState())
     val state: State<RegisterState> = _state
 
-    private val _emailText = mutableStateOf("")
-    val emailText: State<String> = _emailText
+    fun onEvent(event: RegisterEvent) {
+        when (event) {
+            is RegisterEvent.EnteredUsername -> {
 
-    private val _usernameText = mutableStateOf("")
-    val usernameText: State<String> = _usernameText
+            }
+            is RegisterEvent.EnteredEmail -> {
 
-    private val _passwordText = mutableStateOf("")
-    val passwordText: State<String> = _passwordText
+            }
+            is RegisterEvent.EnteredPassword -> {
 
-    private val _confirmPasswordText = mutableStateOf("")
-    val confirmPasswordText: State<String> = _confirmPasswordText
+            }
+            is RegisterEvent.Register -> {
 
-    fun setEmailText(email: String) {
-        _emailText.value = email
+            }
+        }
     }
 
-    fun setUsernameText(username: String) {
-        _usernameText.value = username
-    }
-
-    fun setPasswordText(password: String) {
-        _passwordText.value = password
-    }
-
-    fun setConfirmPasswordText(confirmPassword: String) {
-        _confirmPasswordText.value = confirmPassword
+    private fun validateUsername(username: String) {
+        val trimmedUsername = username.trim()
+        if (trimmedUsername.isBlank()) {
+            _state.value = _state.value.copy(
+                usernameError = RegisterState.UsernameError.FieldEmpty
+            )
+            return
+        }
+        if (trimmedUsername.length < Constants.MIN_USERNAME_LENGTH) {
+            _state.value = _state.value.copy(
+                usernameError = RegisterState.UsernameError.InputTooShort
+            )
+            return
+        }
     }
 }
