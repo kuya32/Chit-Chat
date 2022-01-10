@@ -50,59 +50,59 @@ fun RegisterScreen(
                 text = stringResource(id = R.string.register),
                 style = MaterialTheme.typography.h1
             )
-            Spacer(modifier = Modifier.height(SpaceSmall))
-            StandardTextField(
-                text = viewModel.emailText.value,
-                onValueChange = {
-                    viewModel.setEmailText(it)
-                },
-                hint = stringResource(id = R.string.email_hint),
-                keyboardType = KeyboardType.Text,
-                leadingIcon = Icons.Filled.Email
-            )
-            Spacer(modifier = Modifier.height(SpaceSmall))
-            StandardTextField(
-                text = viewModel.usernameText.value,
-                onValueChange = {
-                    viewModel.setUsernameText(it)
-                },
-                hint = stringResource(id = R.string.username_hint),
-                keyboardType = KeyboardType.Text,
-                leadingIcon = Icons.Filled.AccountBox
-            )
-            Spacer(modifier = Modifier.height(SpaceSmall))
-            StandardTextField(
-                text = viewModel.passwordText.value,
-                onValueChange = {
-                    viewModel.setPasswordText(it)
-                },
-                hint = stringResource(id = R.string.password_hint),
-                keyboardType = KeyboardType.Password,
-                leadingIcon = Icons.Filled.Password
-            )
-            Spacer(modifier = Modifier.height(SpaceSmall))
-            StandardTextField(
-                text = viewModel.confirmPasswordText.value,
-                onValueChange = {
-                    viewModel.setConfirmPasswordText(it)
-                },
-                hint = stringResource(id = R.string.confirm_password_hint),
-                keyboardType = KeyboardType.Password,
-                leadingIcon = Icons.Filled.LockOpen
-            )
-            Spacer(modifier = Modifier.height(SpaceSmall))
-            Button(
-                onClick = {
-                    // TODO: Input user account info and navigate to Login Screen
-                },
-                modifier = Modifier
-                    .align(Alignment.End)
-            ) {
-                Text(
-                    text = stringResource(id = R.string.register),
-                    color = MaterialTheme.colors.onPrimary
-                )
-            }
+//            Spacer(modifier = Modifier.height(SpaceSmall))
+//            StandardTextField(
+//                text = viewModel.emailText.value,
+//                onValueChange = {
+//                    viewModel.setEmailText(it)
+//                },
+//                hint = stringResource(id = R.string.email_hint),
+//                keyboardType = KeyboardType.Text,
+//                leadingIcon = Icons.Filled.Email
+//            )
+//            Spacer(modifier = Modifier.height(SpaceSmall))
+//            StandardTextField(
+//                text = viewModel.usernameText.value,
+//                onValueChange = {
+//                    viewModel.setUsernameText(it)
+//                },
+//                hint = stringResource(id = R.string.username_hint),
+//                keyboardType = KeyboardType.Text,
+//                leadingIcon = Icons.Filled.AccountBox
+//            )
+//            Spacer(modifier = Modifier.height(SpaceSmall))
+//            StandardTextField(
+//                text = viewModel.passwordText.value,
+//                onValueChange = {
+//                    viewModel.setPasswordText(it)
+//                },
+//                hint = stringResource(id = R.string.password_hint),
+//                keyboardType = KeyboardType.Password,
+//                leadingIcon = Icons.Filled.Password
+//            )
+//            Spacer(modifier = Modifier.height(SpaceSmall))
+//            StandardTextField(
+//                text = viewModel.confirmPasswordText.value,
+//                onValueChange = {
+//                    viewModel.setConfirmPasswordText(it)
+//                },
+//                hint = stringResource(id = R.string.confirm_password_hint),
+//                keyboardType = KeyboardType.Password,
+//                leadingIcon = Icons.Filled.LockOpen
+//            )
+//            Spacer(modifier = Modifier.height(SpaceSmall))
+//            Button(
+//                onClick = {
+//                    // TODO: Input user account info and navigate to Login Screen
+//                },
+//                modifier = Modifier
+//                    .align(Alignment.End)
+//            ) {
+//                Text(
+//                    text = stringResource(id = R.string.register),
+//                    color = MaterialTheme.colors.onPrimary
+//                )
+//            }
         }
         Text(
             text = buildAnnotatedString {
