@@ -54,4 +54,19 @@
     <string name="select_top_three_skills">Select your top three skills:</string>
     <string name="add_user">Add User</string>
     <string name="search_for_users">Search for users</string>
+    <string name="create_a_post">Create a new post</string>
+    <string name="choose_image">Choose image</string>
+    <string name="description_hint">Description</string>
+    <string name="post">Post</string>
+    <string name="send_image">Send Image</string>
+    <string name="liked_by">Liked by</string>
+    <string name="email_required">Email required!</string>
+    <string name="invalid_email">Invalid email!</string>
+    <string name="username_required">Username required!</string>
+    <string name="username_too_short">Must be more than 3 characters.</string>
+    <string name="password_required">Password required!</string>
+    <string name="password_too_short">Must be more than 3 characters.</string>
+    <string name="password_requirements">Must contain one uppercase letter and one number.</string>
+    <string name="password_confirmation_required">Password confirmation required!</string>
+    <string name="confirmation_password_does_not_match">Confirmation password does not match!</string>
 </resources>

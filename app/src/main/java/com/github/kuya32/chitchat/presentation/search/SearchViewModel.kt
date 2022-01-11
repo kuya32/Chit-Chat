@@ -18,4 +18,5 @@ class SearchViewModel @Inject constructor(
     fun setSearchState(state: StandardTextFieldState) {
         _searchState.value = state
     }
+
 }
