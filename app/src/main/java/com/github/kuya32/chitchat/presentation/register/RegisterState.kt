@@ -9,6 +9,8 @@ data class RegisterState(
     val emailError: EmailError? = null,
     val passwordText: String = "",
     val passwordError: PasswordError? = null,
+    val passwordConfirmationText: String = "",
+    val passwordConfirmationError: PasswordConfirmationError? = null,
     val isPasswordVisible: Boolean = false
 ) {
     sealed class UsernameError {
@@ -25,5 +27,10 @@ data class RegisterState(
         object FieldEmpty: PasswordError()
         object InvalidPassword: PasswordError()
         object InputTooShort: PasswordError()
+    }
+
+    sealed class PasswordConfirmationError {
+        object FieldEmpty: PasswordConfirmationError()
+        object PasswordDoesNotMatch: PasswordConfirmationError()
     }
 }

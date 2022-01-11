@@ -31,10 +31,21 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
                     passwordText = event.value
                 )
             }
+            is RegisterEvent.TogglePasswordVisibility -> {
+                _state.value = _state.value.copy(
+                    isPasswordVisible = !state.value.isPasswordVisible
+                )
+            }
+            is RegisterEvent.EnteredConfirmationPassword -> {
+                _state.value = _state.value.copy(
+                    passwordConfirmationText = event.value
+                )
+            }
             is RegisterEvent.Register -> {
                 validateUsername(_state.value.usernameText)
                 validateEmail(_state.value.emailText)
                 validatePassword(_state.value.passwordText)
+                validatePasswordConfirmation(_state.value.passwordText, _state.value.passwordConfirmationText)
             }
         }
     }
@@ -95,5 +106,21 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
             return
         }
         _state.value = _state.value.copy(passwordError = null)
+    }
+
+    private fun validatePasswordConfirmation(password: String, passwordConfirmation: String) {
+        if (passwordConfirmation.isBlank()) {
+            _state.value = _state.value.copy(
+                passwordConfirmationError = RegisterState.PasswordConfirmationError.FieldEmpty
+            )
+            return
+        }
+        if (passwordConfirmation != password) {
+            _state.value = _state.value.copy(
+                passwordConfirmationError = RegisterState.PasswordConfirmationError.PasswordDoesNotMatch
+            )
+            return
+        }
+        _state.value = _state.value.copy(passwordConfirmationError = null)
     }
 }
