@@ -4,6 +4,7 @@ import android.util.Patterns
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import com.github.kuya32.chitchat.presentation.utils.states.StandardTextFieldState
 import com.github.kuya32.chitchat.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -11,8 +12,14 @@ import javax.inject.Inject
 @HiltViewModel
 class RegisterViewModel @Inject constructor() : ViewModel() {
 
-    private val _state = mutableStateOf(RegisterState())
-    val state: State<RegisterState> = _state
+    private val _emailState = mutableStateOf(StandardTextFieldState())
+    val emailState: State<StandardTextFieldState> = _emailState
+
+    private val _usernameState = mutableStateOf(StandardTextFieldState())
+    val usernameState: State<StandardTextFieldState> = _usernameState
+
+    private val _passwordState = mutableStateOf(StandardTextFieldState())
+    val passwordState: State<StandardTextFieldState> = _passwordState
 
     fun onEvent(event: RegisterEvent) {
         when (event) {
