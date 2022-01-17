@@ -1,6 +1,6 @@
-package com.github.kuya32.chitchat.presentation.register
+package com.github.kuya32.chitchat.feature_auth.presentation.register
 
-import com.github.kuya32.chitchat.domain.models.User
+import com.github.kuya32.chitchat.core.domain.models.User
 
 data class RegisterState(
     val usernameText: String = "",

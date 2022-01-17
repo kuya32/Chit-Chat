@@ -1,10 +1,12 @@
-package com.github.kuya32.chitchat.presentation.register
+package com.github.kuya32.chitchat.feature_auth.presentation.register
 
 import android.util.Patterns
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.github.kuya32.chitchat.presentation.utils.states.StandardTextFieldState
+import com.github.kuya32.chitchat.core.domain.states.PasswordTextFieldState
+import com.github.kuya32.chitchat.core.domain.states.StandardTextFieldState
+import com.github.kuya32.chitchat.feature_auth.domain.AuthErrors
 import com.github.kuya32.chitchat.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -18,41 +20,44 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
     private val _usernameState = mutableStateOf(StandardTextFieldState())
     val usernameState: State<StandardTextFieldState> = _usernameState
 
-    private val _passwordState = mutableStateOf(StandardTextFieldState())
-    val passwordState: State<StandardTextFieldState> = _passwordState
+    private val _passwordState = mutableStateOf(PasswordTextFieldState())
+    val passwordState: State<PasswordTextFieldState> = _passwordState
+
+    private val _passwordConfirmationState = mutableStateOf(StandardTextFieldState())
+    val passwordConfirmationState: State<StandardTextFieldState> = _passwordConfirmationState
 
     fun onEvent(event: RegisterEvent) {
         when (event) {
             is RegisterEvent.EnteredUsername -> {
-                _state.value = _state.value.copy(
-                    usernameText = event.value
+                _usernameState.value = _usernameState.value.copy(
+                    text = event.value
                 )
             }
             is RegisterEvent.EnteredEmail -> {
-                _state.value = _state.value.copy(
-                    emailText = event.value
+                _emailState.value = _emailState.value.copy(
+                    text = event.value
                 )
             }
             is RegisterEvent.EnteredPassword -> {
-                _state.value = _state.value.copy(
-                    passwordText = event.value
+                _passwordState.value = _passwordState.value.copy(
+                    text = event.value
                 )
             }
             is RegisterEvent.TogglePasswordVisibility -> {
-                _state.value = _state.value.copy(
-                    isPasswordVisible = !state.value.isPasswordVisible
+                _passwordState.value = _passwordState.value.copy(
+                    isPasswordVisible = !passwordState.value.isPasswordVisible
                 )
             }
             is RegisterEvent.EnteredConfirmationPassword -> {
-                _state.value = _state.value.copy(
-                    passwordConfirmationText = event.value
+                _passwordConfirmationState.value = _passwordConfirmationState.value.copy(
+                    text = event.value
                 )
             }
             is RegisterEvent.Register -> {
-                validateUsername(_state.value.usernameText)
-                validateEmail(_state.value.emailText)
-                validatePassword(_state.value.passwordText)
-                validatePasswordConfirmation(_state.value.passwordText, _state.value.passwordConfirmationText)
+                validateUsername(_usernameState.value.text)
+                validateEmail(_emailState.value.text)
+                validatePassword(_passwordState.value.text)
+                validatePasswordConfirmation(_passwordState.value.text, _passwordConfirmationState.value.text)
             }
         }
     }
@@ -60,18 +65,18 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
     private fun validateUsername(username: String) {
         val trimmedUsername = username.trim()
         if (trimmedUsername.isBlank()) {
-            _state.value = _state.value.copy(
-                usernameError = RegisterState.UsernameError.FieldEmpty
+            _usernameState.value = _usernameState.value.copy(
+                error = AuthErrors.FieldEmpty
             )
             return
         }
         if (trimmedUsername.length < Constants.MIN_USERNAME_LENGTH) {
-            _state.value = _state.value.copy(
-                usernameError = RegisterState.UsernameError.InputTooShort
+            _usernameState.value = _usernameState.value.copy(
+                error = RegisterState.UsernameError.InputTooShort
             )
             return
         }
-        _state.value = _state.value.copy(usernameError = null)
+        _usernameState.value = _usernameState.value.copy(error = null)
     }
 
     private fun validateEmail(email: String) {

@@ -1,4 +1,4 @@
-package com.github.kuya32.chitchat.presentation.register
+package com.github.kuya32.chitchat.feature_auth.presentation.register
 
 sealed class RegisterEvent {
     data class EnteredUsername(val value: String): RegisterEvent()

@@ -1,4 +1,4 @@
-package com.github.kuya32.chitchat.presentation.register
+package com.github.kuya32.chitchat.feature_auth.presentation.register
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.github.kuya32.chitchat.R
+import com.github.kuya32.chitchat.feature_auth.domain.AuthErrors
 import com.github.kuya32.chitchat.presentation.components.StandardTextField
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceLarge
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceMedium
@@ -29,7 +30,10 @@ fun RegisterScreen(
     navController: NavController,
     viewModel: RegisterViewModel = hiltViewModel()
 ) {
-    val state = viewModel.state.value
+    val usernameState = viewModel.usernameState.value
+    val emailState = viewModel.emailState.value
+    val passwordState = viewModel.passwordState.value
+    val passwordConfirmationState = viewModel.passwordConfirmationState.value
     Box(
         Modifier
             .fillMaxSize()
@@ -52,12 +56,12 @@ fun RegisterScreen(
             )
             Spacer(modifier = Modifier.height(SpaceSmall))
             StandardTextField(
-                text = state.emailText,
+                text = emailState.text,
                 onValueChange = {
                     viewModel.onEvent(RegisterEvent.EnteredEmail(it))
                 },
-                error = when (state.emailError) {
-                    RegisterState.EmailError.FieldEmpty -> {
+                error = when (emailState.error) {
+                    is AuthErrors.FieldEmpty -> {
                         stringResource(id = R.string.email_required)
                     }
                     RegisterState.EmailError.InvalidEmail -> {
@@ -71,11 +75,11 @@ fun RegisterScreen(
             )
             Spacer(modifier = Modifier.height(SpaceSmall))
             StandardTextField(
-                text = state.usernameText,
+                text = usernameState.text,
                 onValueChange = {
                     viewModel.onEvent(RegisterEvent.EnteredUsername(it))
                 },
-                error = when (state.usernameError) {
+                error = when (usernameState.error) {
                     RegisterState.UsernameError.FieldEmpty -> {
                         stringResource(id = R.string.username_required)
                     }

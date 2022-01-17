@@ -1,4 +1,4 @@
-package com.github.kuya32.chitchat.domain.models
+package com.github.kuya32.chitchat.core.domain.models
 
 data class Comment(
     val commentId: Int = -1,

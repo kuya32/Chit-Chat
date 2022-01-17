@@ -24,6 +24,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.github.kuya32.chitchat.R
+import com.github.kuya32.chitchat.core.domain.utils.Error
 import com.github.kuya32.chitchat.presentation.utils.TestTags
 import com.github.kuya32.chitchat.utils.Constants
 
@@ -32,7 +33,7 @@ fun StandardTextField(
     modifier: Modifier = Modifier,
     text: String = "",
     hint: String = "",
-    error: String = "",
+    error: Error? = null,
     singleLine: Boolean = true,
     maxLength: Int = 40,
     maxLines: Int = 1,

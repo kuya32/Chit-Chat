@@ -32,8 +32,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.github.kuya32.chitchat.R
-import com.github.kuya32.chitchat.domain.models.Post
-import com.github.kuya32.chitchat.domain.models.User
+import com.github.kuya32.chitchat.core.domain.models.Post
+import com.github.kuya32.chitchat.core.domain.models.User
 import com.github.kuya32.chitchat.presentation.components.Post
 import com.github.kuya32.chitchat.presentation.components.StandardToolbar
 import com.github.kuya32.chitchat.presentation.profile.components.BannerSection
