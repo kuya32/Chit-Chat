@@ -33,7 +33,7 @@ fun StandardTextField(
     modifier: Modifier = Modifier,
     text: String = "",
     hint: String = "",
-    error: Error? = null,
+    error: String = "",
     singleLine: Boolean = true,
     maxLength: Int = 40,
     maxLines: Int = 1,

@@ -50,7 +50,7 @@ fun MainFeedScreen(
             }
         )
         Post(
-            post = com.github.kuya32.chitchat.domain.models.Post(
+            post = com.github.kuya32.chitchat.core.domain.models.Post(
                 username = "Marchael Acode",
                 imageUrl = "",
                 profileImageUrl = "",

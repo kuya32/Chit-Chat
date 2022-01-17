@@ -24,7 +24,7 @@ import com.github.kuya32.chitchat.presentation.components.StandardToolbar
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceLarge
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceMedium
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceSmall
-import com.github.kuya32.chitchat.presentation.utils.states.StandardTextFieldState
+import com.github.kuya32.chitchat.core.domain.states.StandardTextFieldState
 
 @Composable
 fun CreatePostScreen(
@@ -32,7 +32,6 @@ fun CreatePostScreen(
     onConfirmClick: () -> Unit = {},
     viewModel: CreatedPostViewModel = hiltViewModel()
 ) {
-    viewModel.taumBday(27984, 1402, 619246, 615589, 247954)
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -98,7 +97,7 @@ fun CreatePostScreen(
                 },
                 singleLine = false,
                 maxLines = 3,
-                error = viewModel.postDescriptionState.value.error,
+                error = "",
                 hint = stringResource(id = R.string.description_hint),
                 keyboardType = KeyboardType.Text
             )

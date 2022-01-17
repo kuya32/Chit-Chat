@@ -64,7 +64,7 @@ fun RegisterScreen(
                     is AuthErrors.FieldEmpty -> {
                         stringResource(id = R.string.email_required)
                     }
-                    RegisterState.EmailError.InvalidEmail -> {
+                    is AuthErrors.InvalidEmail -> {
                         stringResource(id = R.string.invalid_email)
                     }
                     else -> ""
@@ -80,10 +80,10 @@ fun RegisterScreen(
                     viewModel.onEvent(RegisterEvent.EnteredUsername(it))
                 },
                 error = when (usernameState.error) {
-                    RegisterState.UsernameError.FieldEmpty -> {
+                    is AuthErrors.FieldEmpty -> {
                         stringResource(id = R.string.username_required)
                     }
-                    RegisterState.UsernameError.InputTooShort -> {
+                    is AuthErrors.InputTooShort -> {
                         stringResource(id = R.string.username_too_short)
                     }
                     else -> ""
@@ -94,23 +94,23 @@ fun RegisterScreen(
             )
             Spacer(modifier = Modifier.height(SpaceSmall))
             StandardTextField(
-                text = state.passwordText,
+                text = passwordState.text,
                 onValueChange = {
                     viewModel.onEvent(RegisterEvent.EnteredPassword(it))
                 },
-                error = when (state.passwordError) {
-                    RegisterState.PasswordError.FieldEmpty -> {
+                error = when (passwordState.error) {
+                    is AuthErrors.FieldEmpty -> {
                         stringResource(id = R.string.password_required)
                     }
-                    RegisterState.PasswordError.InputTooShort -> {
+                    is AuthErrors.InputTooShort -> {
                         stringResource(id = R.string.password_too_short)
                     }
-                    RegisterState.PasswordError.InvalidPassword -> {
+                    is AuthErrors.InvalidPassword -> {
                         stringResource(id = R.string.password_requirements)
                     }
                     else -> ""
                 },
-                isPasswordVisible = state.isPasswordVisible,
+                isPasswordVisible = passwordState.isPasswordVisible,
                 onPasswordToggleClick = {
                     viewModel.onEvent(RegisterEvent.TogglePasswordVisibility)
                 },
@@ -120,20 +120,20 @@ fun RegisterScreen(
             )
             Spacer(modifier = Modifier.height(SpaceSmall))
             StandardTextField(
-                text = state.passwordConfirmationText,
+                text = passwordConfirmationState.text,
                 onValueChange = {
                     viewModel.onEvent(RegisterEvent.EnteredConfirmationPassword(it))
                 },
-                error = when (state.passwordConfirmationError) {
-                    RegisterState.PasswordConfirmationError.FieldEmpty -> {
+                error = when (passwordConfirmationState.error) {
+                    is AuthErrors.FieldEmpty -> {
                         stringResource(id = R.string.password_confirmation_required)
                     }
-                    RegisterState.PasswordConfirmationError.PasswordDoesNotMatch -> {
+                    is AuthErrors.PasswordDoesNotMatch -> {
                         stringResource(id = R.string.confirmation_password_does_not_match)
                     }
                     else -> ""
                 },
-                isPasswordVisible = state.isPasswordVisible,
+                isPasswordVisible = passwordConfirmationState.isPasswordVisible,
                 onPasswordToggleClick = {
                     viewModel.onEvent(RegisterEvent.TogglePasswordVisibility)
                 },

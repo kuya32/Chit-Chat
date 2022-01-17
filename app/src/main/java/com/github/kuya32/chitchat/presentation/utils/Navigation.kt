@@ -8,7 +8,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.github.kuya32.chitchat.R
-import com.github.kuya32.chitchat.domain.models.Post
+import com.github.kuya32.chitchat.core.domain.models.Post
 import com.github.kuya32.chitchat.presentation.PersonListScreen
 import com.github.kuya32.chitchat.presentation.activity.ActivityScreen
 import com.github.kuya32.chitchat.presentation.create_post.CreatePostScreen
@@ -19,7 +19,7 @@ import com.github.kuya32.chitchat.presentation.login.LoginScreen
 import com.github.kuya32.chitchat.presentation.message.MessageScreen
 import com.github.kuya32.chitchat.presentation.post_detail.PostDetailScreen
 import com.github.kuya32.chitchat.presentation.profile.ProfileScreen
-import com.github.kuya32.chitchat.presentation.register.RegisterScreen
+import com.github.kuya32.chitchat.feature_auth.presentation.register.RegisterScreen
 import com.github.kuya32.chitchat.presentation.splash.SplashScreen
 import com.github.kuya32.chitchat.presentation.search.SearchScreen
 

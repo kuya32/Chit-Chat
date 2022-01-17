@@ -13,7 +13,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.github.kuya32.chitchat.R
-import com.github.kuya32.chitchat.domain.models.User
+import com.github.kuya32.chitchat.core.domain.models.User
 import com.github.kuya32.chitchat.presentation.components.StandardToolbar
 import com.github.kuya32.chitchat.presentation.components.UserProfileItem
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceMedium

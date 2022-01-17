@@ -27,8 +27,8 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.github.kuya32.chitchat.R
-import com.github.kuya32.chitchat.domain.models.Comment
-import com.github.kuya32.chitchat.domain.models.Post
+import com.github.kuya32.chitchat.core.domain.models.Comment
+import com.github.kuya32.chitchat.core.domain.models.Post
 import com.github.kuya32.chitchat.presentation.components.ActionRow
 import com.github.kuya32.chitchat.presentation.components.StandardToolbar
 import com.github.kuya32.chitchat.presentation.ui.theme.*

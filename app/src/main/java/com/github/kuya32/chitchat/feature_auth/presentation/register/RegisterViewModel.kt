@@ -12,7 +12,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterViewModel @Inject constructor() : ViewModel() {
+class RegisterViewModel @Inject constructor(
+
+) : ViewModel() {
 
     private val _emailState = mutableStateOf(StandardTextFieldState())
     val emailState: State<StandardTextFieldState> = _emailState
@@ -23,8 +25,8 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
     private val _passwordState = mutableStateOf(PasswordTextFieldState())
     val passwordState: State<PasswordTextFieldState> = _passwordState
 
-    private val _passwordConfirmationState = mutableStateOf(StandardTextFieldState())
-    val passwordConfirmationState: State<StandardTextFieldState> = _passwordConfirmationState
+    private val _passwordConfirmationState = mutableStateOf(PasswordTextFieldState())
+    val passwordConfirmationState: State<PasswordTextFieldState> = _passwordConfirmationState
 
     fun onEvent(event: RegisterEvent) {
         when (event) {
@@ -72,7 +74,7 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
         }
         if (trimmedUsername.length < Constants.MIN_USERNAME_LENGTH) {
             _usernameState.value = _usernameState.value.copy(
-                error = RegisterState.UsernameError.InputTooShort
+                error = AuthErrors.InputTooShort
             )
             return
         }
@@ -82,57 +84,57 @@ class RegisterViewModel @Inject constructor() : ViewModel() {
     private fun validateEmail(email: String) {
         val trimmedEmail = email.trim()
         if (trimmedEmail.isBlank()) {
-            _state.value = _state.value.copy(
-                emailError = RegisterState.EmailError.FieldEmpty
+            _emailState.value = _emailState.value.copy(
+                error = AuthErrors.FieldEmpty
             )
             return
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            _state.value = _state.value.copy(
-                emailError = RegisterState.EmailError.InvalidEmail
+            _emailState.value = _emailState.value.copy(
+                error = AuthErrors.InvalidEmail
             )
             return
         }
-        _state.value = _state.value.copy(emailError = null)
+        _emailState.value = _emailState.value.copy(error = null)
     }
 
     private fun validatePassword(password: String) {
         if (password.isBlank()) {
-            _state.value = _state.value.copy(
-                passwordError = RegisterState.PasswordError.FieldEmpty
+            _passwordState.value = _passwordState.value.copy(
+                error = AuthErrors.FieldEmpty
             )
             return
         }
         if (password.length < Constants.MIN_PASSWORD_LENGTH) {
-            _state.value = _state.value.copy(
-                passwordError = RegisterState.PasswordError.InputTooShort
+            _passwordState.value = _passwordState.value.copy(
+                error = AuthErrors.InputTooShort
             )
             return
         }
         val capitalLettersInPassword = password.any { it.isUpperCase() }
         val numberInPassword = password.any { it.isDigit() }
         if (!capitalLettersInPassword || ! numberInPassword) {
-            _state.value = state.value.copy(
-                passwordError = RegisterState.PasswordError.InvalidPassword
+            _passwordState.value = passwordState.value.copy(
+                error = AuthErrors.InvalidPassword
             )
             return
         }
-        _state.value = _state.value.copy(passwordError = null)
+        _passwordState.value = _passwordState.value.copy(error = null)
     }
 
     private fun validatePasswordConfirmation(password: String, passwordConfirmation: String) {
         if (passwordConfirmation.isBlank()) {
-            _state.value = _state.value.copy(
-                passwordConfirmationError = RegisterState.PasswordConfirmationError.FieldEmpty
+            _passwordConfirmationState.value = _passwordConfirmationState.value.copy(
+                error = AuthErrors.FieldEmpty
             )
             return
         }
         if (passwordConfirmation != password) {
-            _state.value = _state.value.copy(
-                passwordConfirmationError = RegisterState.PasswordConfirmationError.PasswordDoesNotMatch
+            _passwordConfirmationState.value = _passwordConfirmationState.value.copy(
+                error = AuthErrors.PasswordDoesNotMatch
             )
             return
         }
-        _state.value = _state.value.copy(passwordConfirmationError = null)
+        _passwordConfirmationState.value = _passwordConfirmationState.value.copy(error = null)
     }
 }

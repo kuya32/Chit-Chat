@@ -12,7 +12,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.github.kuya32.chitchat.R
-import com.github.kuya32.chitchat.domain.models.BottomNavItem
+import com.github.kuya32.chitchat.core.domain.models.BottomNavItem
 import com.github.kuya32.chitchat.presentation.utils.Screen
 
 @Composable

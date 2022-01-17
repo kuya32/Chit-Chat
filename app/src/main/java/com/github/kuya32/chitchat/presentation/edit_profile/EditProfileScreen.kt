@@ -36,7 +36,7 @@ import com.github.kuya32.chitchat.presentation.components.StandardTextField
 import com.github.kuya32.chitchat.presentation.components.StandardToolbar
 import com.github.kuya32.chitchat.presentation.edit_profile.components.Chip
 import com.github.kuya32.chitchat.presentation.ui.theme.*
-import com.github.kuya32.chitchat.presentation.utils.states.StandardTextFieldState
+import com.github.kuya32.chitchat.core.domain.states.StandardTextFieldState
 import com.github.kuya32.chitchat.presentation.utils.toPx
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.MainAxisAlignment
@@ -104,7 +104,7 @@ fun EditProfileScreen(
                             StandardTextFieldState(text = it)
                         )
                     },
-                    error = viewModel.usernameState.value.error,
+                    error = "",
                     hint = stringResource(id = R.string.username_hint),
                     leadingIcon = Icons.Default.Person,
                     keyboardType = KeyboardType.Text
@@ -118,7 +118,7 @@ fun EditProfileScreen(
                             StandardTextFieldState(text = it)
                         )
                     },
-                    error = viewModel.instagramState.value.error,
+                    error = "",
                     hint = stringResource(id = R.string.instagram_hint),
                     leadingIcon = ImageVector.vectorResource(id = R.drawable.ic_insta_icon),
                     keyboardType = KeyboardType.Text
@@ -132,7 +132,7 @@ fun EditProfileScreen(
                             StandardTextFieldState(text = it)
                         )
                     },
-                    error = viewModel.linkedInState.value.error,
+                    error = "",
                     hint = stringResource(id = R.string.linkedIn_hint),
                     leadingIcon = ImageVector.vectorResource(id = R.drawable.ic_linkedin_icon),
                     keyboardType = KeyboardType.Text
@@ -146,7 +146,7 @@ fun EditProfileScreen(
                             StandardTextFieldState(text = it)
                         )
                     },
-                    error = viewModel.githubState.value.error,
+                    error = "",
                     hint = stringResource(id = R.string.github_hint),
                     leadingIcon = ImageVector.vectorResource(id = R.drawable.ic_github_icon),
                     keyboardType = KeyboardType.Text
@@ -161,7 +161,7 @@ fun EditProfileScreen(
                         )
                     },
                     maxLines = 3,
-                    error = viewModel.bioState.value.error,
+                    error = "",
                     hint = stringResource(id = R.string.bio_hint),
                     leadingIcon = Icons.Default.Description,
                     keyboardType = KeyboardType.Text
