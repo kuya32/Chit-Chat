@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.github.kuya32.chitchat.R
 import com.github.kuya32.chitchat.core.domain.models.Activity
-import com.github.kuya32.chitchat.core.domain.utils.ActivityAction
+import com.github.kuya32.chitchat.core.utils.ActivityAction
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceSmall
 
 @Composable

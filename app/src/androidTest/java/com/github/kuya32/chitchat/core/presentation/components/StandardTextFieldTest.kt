@@ -1,4 +1,4 @@
-package com.github.kuya32.chitchat.presentation.components
+package com.github.kuya32.chitchat.core.presentation.components
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.mutableStateOf
@@ -15,10 +15,10 @@ import androidx.compose.ui.test.performTextClearance
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.github.kuya32.chitchat.MainActivity
-import com.github.kuya32.chitchat.presentation.utils.TestTags.STANDARD_TEXT_FIELD
-import com.github.kuya32.chitchat.presentation.utils.TestTags.PASSWORD_TOGGLE
-import com.github.kuya32.chitchat.utils.Constants
+import com.github.kuya32.chitchat.core.presentation.MainActivity
+import com.github.kuya32.chitchat.core.utils.TestTags.STANDARD_TEXT_FIELD
+import com.github.kuya32.chitchat.core.utils.TestTags.PASSWORD_TOGGLE
+import com.github.kuya32.chitchat.core.utils.Constants
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule

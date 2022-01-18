@@ -1,4 +1,4 @@
-package com.github.kuya32.chitchat.utils
+package com.github.kuya32.chitchat.core.utils
 
 object Constants {
     const val SPLASH_SCREEN_DURATION = 3000L

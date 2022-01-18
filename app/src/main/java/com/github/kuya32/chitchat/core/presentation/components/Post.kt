@@ -1,4 +1,4 @@
-package com.github.kuya32.chitchat.presentation.components
+package com.github.kuya32.chitchat.core.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.sp
 import com.github.kuya32.chitchat.R
 import com.github.kuya32.chitchat.core.domain.models.Post
 import com.github.kuya32.chitchat.presentation.ui.theme.*
-import com.github.kuya32.chitchat.utils.Constants
+import com.github.kuya32.chitchat.core.utils.Constants
 
 @Composable
 fun Post(

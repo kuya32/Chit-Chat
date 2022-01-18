@@ -4,10 +4,10 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.navigation.NavController
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.github.kuya32.chitchat.MainActivity
+import com.github.kuya32.chitchat.core.presentation.MainActivity
 import com.github.kuya32.chitchat.presentation.ui.theme.ChitChatTheme
-import com.github.kuya32.chitchat.presentation.utils.Screen
-import com.github.kuya32.chitchat.utils.Constants
+import com.github.kuya32.chitchat.core.utils.Screen
+import com.github.kuya32.chitchat.core.utils.Constants
 import io.mockk.MockKAnnotations
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.verify

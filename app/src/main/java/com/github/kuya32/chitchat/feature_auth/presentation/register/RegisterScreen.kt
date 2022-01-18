@@ -19,8 +19,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.github.kuya32.chitchat.R
-import com.github.kuya32.chitchat.feature_auth.domain.AuthErrors
-import com.github.kuya32.chitchat.presentation.components.StandardTextField
+import com.github.kuya32.chitchat.feature_auth.presentation.util.AuthErrors
+import com.github.kuya32.chitchat.core.presentation.components.StandardTextField
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceLarge
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceMedium
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceSmall
@@ -135,7 +135,7 @@ fun RegisterScreen(
                 },
                 isPasswordVisible = passwordConfirmationState.isPasswordVisible,
                 onPasswordToggleClick = {
-                    viewModel.onEvent(RegisterEvent.TogglePasswordVisibility)
+                    viewModel.onEvent(RegisterEvent.ToggleConfirmationPasswordVisibility)
                 },
                 hint = stringResource(id = R.string.confirm_password_hint),
                 keyboardType = KeyboardType.Password,

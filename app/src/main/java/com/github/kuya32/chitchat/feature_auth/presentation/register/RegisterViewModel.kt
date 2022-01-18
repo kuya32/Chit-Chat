@@ -4,16 +4,19 @@ import android.util.Patterns
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.github.kuya32.chitchat.core.domain.states.PasswordTextFieldState
 import com.github.kuya32.chitchat.core.domain.states.StandardTextFieldState
-import com.github.kuya32.chitchat.feature_auth.domain.AuthErrors
-import com.github.kuya32.chitchat.utils.Constants
+import com.github.kuya32.chitchat.feature_auth.presentation.util.AuthErrors
+import com.github.kuya32.chitchat.core.utils.Constants
+import com.github.kuya32.chitchat.feature_auth.domain.use_case.RegisterUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
-
+    private val registerUseCase: RegisterUseCase
 ) : ViewModel() {
 
     private val _emailState = mutableStateOf(StandardTextFieldState())
@@ -55,12 +58,27 @@ class RegisterViewModel @Inject constructor(
                     text = event.value
                 )
             }
+            is RegisterEvent.ToggleConfirmationPasswordVisibility -> {
+                _passwordConfirmationState.value = _passwordConfirmationState.value.copy(
+                    isPasswordVisible = !passwordConfirmationState.value.isPasswordVisible
+                )
+            }
             is RegisterEvent.Register -> {
                 validateUsername(_usernameState.value.text)
                 validateEmail(_emailState.value.text)
                 validatePassword(_passwordState.value.text)
                 validatePasswordConfirmation(_passwordState.value.text, _passwordConfirmationState.value.text)
             }
+        }
+    }
+
+    private fun register() {
+        viewModelScope.launch {
+            val result = registerUseCase(
+                email = emailState.value.text,
+                username = usernameState.value.text,
+                password = passwordState.value.text
+            )
         }
     }
 

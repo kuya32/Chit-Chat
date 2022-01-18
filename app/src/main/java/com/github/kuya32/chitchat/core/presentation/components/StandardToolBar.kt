@@ -1,4 +1,4 @@
-package com.github.kuya32.chitchat.presentation.components
+package com.github.kuya32.chitchat.core.presentation.components
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.Icon

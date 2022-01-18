@@ -1,4 +1,4 @@
-package com.github.kuya32.chitchat.presentation.components
+package com.github.kuya32.chitchat.core.presentation.components
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -16,8 +16,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.github.kuya32.chitchat.presentation.ui.theme.HintGray
-import com.github.kuya32.chitchat.presentation.ui.theme.SpaceMedium
-import com.github.kuya32.chitchat.presentation.ui.theme.SpaceSmall
 
 @Composable
 fun RowScope.StandardBottomNavItem(

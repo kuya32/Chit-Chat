@@ -1,6 +1,6 @@
 package com.github.kuya32.chitchat.core.domain.states
 
-import com.github.kuya32.chitchat.core.domain.utils.Error
+import com.github.kuya32.chitchat.core.utils.Error
 
 data class PasswordTextFieldState(
     val text: String = "",

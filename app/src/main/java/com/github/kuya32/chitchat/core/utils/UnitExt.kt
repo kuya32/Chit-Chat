@@ -1,4 +1,4 @@
-package com.github.kuya32.chitchat.presentation.utils
+package com.github.kuya32.chitchat.core.utils
 
 import android.content.res.Resources
 import android.util.TypedValue

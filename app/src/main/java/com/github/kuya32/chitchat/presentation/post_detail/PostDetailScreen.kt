@@ -29,11 +29,11 @@ import androidx.navigation.NavController
 import com.github.kuya32.chitchat.R
 import com.github.kuya32.chitchat.core.domain.models.Comment
 import com.github.kuya32.chitchat.core.domain.models.Post
-import com.github.kuya32.chitchat.presentation.components.ActionRow
-import com.github.kuya32.chitchat.presentation.components.StandardToolbar
+import com.github.kuya32.chitchat.core.presentation.components.ActionRow
+import com.github.kuya32.chitchat.core.presentation.components.StandardToolbar
 import com.github.kuya32.chitchat.presentation.ui.theme.*
-import com.github.kuya32.chitchat.presentation.utils.Screen
-import com.github.kuya32.chitchat.utils.Constants
+import com.github.kuya32.chitchat.core.utils.Screen
+import com.github.kuya32.chitchat.core.utils.Constants
 
 @Composable
 fun PostDetailScreen(

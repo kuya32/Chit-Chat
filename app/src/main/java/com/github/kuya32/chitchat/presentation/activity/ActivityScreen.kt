@@ -12,8 +12,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
 import com.github.kuya32.chitchat.R
 import com.github.kuya32.chitchat.core.domain.models.Activity
-import com.github.kuya32.chitchat.core.domain.utils.ActivityAction
-import com.github.kuya32.chitchat.presentation.components.StandardToolbar
+import com.github.kuya32.chitchat.core.utils.ActivityAction
+import com.github.kuya32.chitchat.core.presentation.components.StandardToolbar
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceMedium
 
 @Composable

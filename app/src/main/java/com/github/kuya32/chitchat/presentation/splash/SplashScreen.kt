@@ -15,8 +15,8 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.draw.scale
-import com.github.kuya32.chitchat.presentation.utils.Screen
-import com.github.kuya32.chitchat.utils.Constants
+import com.github.kuya32.chitchat.core.utils.Screen
+import com.github.kuya32.chitchat.core.utils.Constants
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

@@ -1,4 +1,4 @@
-package com.github.kuya32.chitchat.presentation.components
+package com.github.kuya32.chitchat.core.presentation.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.CircleShape
@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.github.kuya32.chitchat.R
 import com.github.kuya32.chitchat.core.domain.models.BottomNavItem
-import com.github.kuya32.chitchat.presentation.utils.Screen
+import com.github.kuya32.chitchat.core.utils.Screen
 
 @Composable
 fun StandardScaffold(
