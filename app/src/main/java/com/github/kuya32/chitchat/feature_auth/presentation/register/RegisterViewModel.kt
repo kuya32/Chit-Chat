@@ -9,6 +9,7 @@ import com.github.kuya32.chitchat.core.domain.states.PasswordTextFieldState
 import com.github.kuya32.chitchat.core.domain.states.StandardTextFieldState
 import com.github.kuya32.chitchat.feature_auth.presentation.util.AuthErrors
 import com.github.kuya32.chitchat.core.utils.Constants
+import com.github.kuya32.chitchat.core.utils.Resource
 import com.github.kuya32.chitchat.feature_auth.domain.use_case.RegisterUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -30,6 +31,9 @@ class RegisterViewModel @Inject constructor(
 
     private val _passwordConfirmationState = mutableStateOf(PasswordTextFieldState())
     val passwordConfirmationState: State<PasswordTextFieldState> = _passwordConfirmationState
+
+    private val _registerState = mutableStateOf(RegisterState())
+    val registerState: State<RegisterState> = _registerState
 
     fun onEvent(event: RegisterEvent) {
         when (event) {
@@ -68,17 +72,37 @@ class RegisterViewModel @Inject constructor(
                 validateEmail(_emailState.value.text)
                 validatePassword(_passwordState.value.text)
                 validatePasswordConfirmation(_passwordState.value.text, _passwordConfirmationState.value.text)
+                registerIfNoErrors()
             }
         }
     }
 
-    private fun register() {
+    private fun registerIfNoErrors() {
+        if(emailState.value.error == null || usernameState.value.error == null || passwordState.value.error == null || passwordConfirmationState.value.error == null) {
+            return
+        }
         viewModelScope.launch {
+            _registerState.value = RegisterState(isLoading = true)
             val result = registerUseCase(
                 email = emailState.value.text,
                 username = usernameState.value.text,
                 password = passwordState.value.text
             )
+            when (result) {
+                is Resource.Success -> {
+                    _registerState.value = RegisterState(
+                        successful = true,
+                        isLoading = false
+                    )
+                }
+                is Resource.Error -> {
+                    _registerState.value = RegisterState(
+                        successful = true,
+                        message = result.uiText,
+                        isLoading = false
+                    )
+                }
+            }
         }
     }
 

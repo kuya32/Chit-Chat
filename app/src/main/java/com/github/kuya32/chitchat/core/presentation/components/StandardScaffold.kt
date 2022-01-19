@@ -20,6 +20,7 @@ fun StandardScaffold(
     navController: NavController,
     modifier: Modifier = Modifier,
     showBottomBar: Boolean = true,
+    state: ScaffoldState,
     bottomNavItems: List<BottomNavItem> = listOf(
         BottomNavItem(
             name = stringResource(id = R.string.home),
@@ -77,6 +78,7 @@ fun StandardScaffold(
                 }
             }
         },
+        scaffoldState = state,
         floatingActionButton = {
             if (showBottomBar) {
                 FloatingActionButton(

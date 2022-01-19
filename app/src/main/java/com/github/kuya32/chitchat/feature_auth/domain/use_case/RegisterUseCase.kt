@@ -1,5 +1,6 @@
 package com.github.kuya32.chitchat.feature_auth.domain.use_case
 
+import com.github.kuya32.chitchat.core.utils.SimpleResource
 import com.github.kuya32.chitchat.feature_auth.domain.repository.AuthRepository
 
 class RegisterUseCase(
@@ -10,7 +11,7 @@ class RegisterUseCase(
         email: String,
         username: String,
         password: String
-    ) {
-        repository.register(email, username, password)
+    ): SimpleResource {
+        return repository.register(email.trim(), username.trim(), password.trim())
     }
 }

@@ -31,11 +31,11 @@ class AuthRepositoryImpl(
             }
         } catch (e: IOException) {
             Resource.Error(
-                message = UiText.StringResource(R.string.couldnt_reach_server)
+                uiText = UiText.StringResource(R.string.couldnt_reach_server)
             )
         } catch (e: HttpException) {
             Resource.Error(
-                message = UiText.StringResource(R.string.something_went_wrong)
+                uiText = UiText.StringResource(R.string.something_went_wrong)
             )
         }
     }

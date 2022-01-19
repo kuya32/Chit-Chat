@@ -1,7 +1,8 @@
-package com.github.kuya32.chitchat.presentation.utils
+package com.github.kuya32.chitchat.core.presentation.components
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -26,7 +27,8 @@ import com.github.kuya32.chitchat.presentation.search.SearchScreen
 @ExperimentalMaterialApi
 @Composable
 fun Navigation(
-    navController: NavHostController
+    navController: NavHostController,
+    scaffoldState: ScaffoldState
 ) {
     NavHost(
         navController = navController,
@@ -40,7 +42,10 @@ fun Navigation(
             LoginScreen(navController = navController)
         }
         composable(Screen.RegisterScreen.route) {
-            RegisterScreen(navController = navController)
+            RegisterScreen(
+                navController = navController,
+                scaffoldState = scaffoldState
+            )
         }
         composable(Screen.MainFeedScreen.route) {
             MainFeedScreen(navController = navController)
