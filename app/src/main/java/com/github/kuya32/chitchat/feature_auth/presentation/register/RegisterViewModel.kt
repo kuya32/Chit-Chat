@@ -5,13 +5,17 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.github.kuya32.chitchat.R
 import com.github.kuya32.chitchat.core.domain.states.PasswordTextFieldState
 import com.github.kuya32.chitchat.core.domain.states.StandardTextFieldState
 import com.github.kuya32.chitchat.feature_auth.presentation.util.AuthErrors
 import com.github.kuya32.chitchat.core.utils.Constants
 import com.github.kuya32.chitchat.core.utils.Resource
+import com.github.kuya32.chitchat.core.utils.UiText
 import com.github.kuya32.chitchat.feature_auth.domain.use_case.RegisterUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -34,6 +38,9 @@ class RegisterViewModel @Inject constructor(
 
     private val _registerState = mutableStateOf(RegisterState())
     val registerState: State<RegisterState> = _registerState
+
+    private val _eventFlow = MutableSharedFlow<UiEvent>()
+    val eventFlow = _eventFlow.asSharedFlow()
 
     fun onEvent(event: RegisterEvent) {
         when (event) {
@@ -78,7 +85,7 @@ class RegisterViewModel @Inject constructor(
     }
 
     private fun registerIfNoErrors() {
-        if(emailState.value.error == null || usernameState.value.error == null || passwordState.value.error == null || passwordConfirmationState.value.error == null) {
+        if(emailState.value.error != null || usernameState.value.error != null || passwordState.value.error != null || passwordConfirmationState.value.error != null) {
             return
         }
         viewModelScope.launch {
@@ -90,17 +97,16 @@ class RegisterViewModel @Inject constructor(
             )
             when (result) {
                 is Resource.Success -> {
-                    _registerState.value = RegisterState(
-                        successful = true,
-                        isLoading = false
+                    _eventFlow.emit(
+                        UiEvent.SnackbarEvent(UiText.StringResource(R.string.success_registration))
                     )
+                    _registerState.value = RegisterState(isLoading = false)
                 }
                 is Resource.Error -> {
-                    _registerState.value = RegisterState(
-                        successful = true,
-                        message = result.uiText,
-                        isLoading = false
+                    _eventFlow.emit(
+                        UiEvent.SnackbarEvent(result.uiText ?: UiText.unknownError())
                     )
+                    _registerState.value = RegisterState(isLoading = false)
                 }
             }
         }
@@ -178,5 +184,9 @@ class RegisterViewModel @Inject constructor(
             return
         }
         _passwordConfirmationState.value = _passwordConfirmationState.value.copy(error = null)
+    }
+
+    sealed class UiEvent {
+        data class SnackbarEvent(val uiText: UiText): UiEvent()
     }
 }

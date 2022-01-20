@@ -6,8 +6,10 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -19,9 +21,11 @@ import androidx.navigation.NavController
 import com.github.kuya32.chitchat.R
 import com.github.kuya32.chitchat.feature_auth.presentation.util.AuthErrors
 import com.github.kuya32.chitchat.core.presentation.components.StandardTextField
+import com.github.kuya32.chitchat.core.presentation.util.asString
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceLarge
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceMedium
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceSmall
+import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun RegisterScreen(
@@ -34,6 +38,20 @@ fun RegisterScreen(
     val passwordState = viewModel.passwordState.value
     val passwordConfirmationState = viewModel.passwordConfirmationState.value
     val registerState = viewModel.registerState.value
+    val context = LocalContext.current
+
+    LaunchedEffect(key1 = true) {
+        viewModel.eventFlow.collectLatest { event ->
+            when(event) {
+                is RegisterViewModel.UiEvent.SnackbarEvent -> {
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        event.uiText.asString(context),
+                        duration = SnackbarDuration.Long
+                    )
+                }
+        }
+        }
+    }
 
     Box(
         Modifier
