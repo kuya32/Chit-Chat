@@ -75,27 +75,45 @@ class RegisterViewModel @Inject constructor(
                 )
             }
             is RegisterEvent.Register -> {
-                validateUsername(_usernameState.value.text)
-                validateEmail(_emailState.value.text)
-                validatePassword(_passwordState.value.text)
-                validatePasswordConfirmation(_passwordState.value.text, _passwordConfirmationState.value.text)
-                registerIfNoErrors()
+                register()
             }
         }
     }
 
-    private fun registerIfNoErrors() {
-        if(emailState.value.error != null || usernameState.value.error != null || passwordState.value.error != null || passwordConfirmationState.value.error != null) {
-            return
-        }
+    private fun register() {
         viewModelScope.launch {
+            _emailState.value = emailState.value.copy(error = null)
+            _usernameState.value = usernameState.value.copy(error = null)
+            _passwordState.value = passwordState.value.copy(error = null)
+            _passwordConfirmationState.value = _passwordConfirmationState.value.copy(error = null)
             _registerState.value = RegisterState(isLoading = true)
-            val result = registerUseCase(
+            val registerResult = registerUseCase(
                 email = emailState.value.text,
                 username = usernameState.value.text,
-                password = passwordState.value.text
+                password = passwordState.value.text,
+                passwordConfirmation = passwordConfirmationState.value.text
             )
-            when (result) {
+            if (registerResult.emailError != null) {
+                _emailState.value = _emailState.value.copy(
+                    error = registerResult.emailError
+                )
+            }
+            if (registerResult.usernameError != null) {
+                _usernameState.value = _usernameState.value.copy(
+                    error = registerResult.usernameError
+                )
+            }
+            if (registerResult.passwordError != null) {
+                _passwordState.value = _passwordState.value.copy(
+                    error = registerResult.passwordError
+                )
+            }
+            if (registerResult.passwordConfirmationError != null) {
+                _passwordConfirmationState.value = _passwordConfirmationState.value.copy(
+                    error = registerResult.passwordConfirmationError
+                )
+            }
+            when (registerResult.result) {
                 is Resource.Success -> {
                     _eventFlow.emit(
                         UiEvent.SnackbarEvent(UiText.StringResource(R.string.success_registration))
@@ -104,86 +122,15 @@ class RegisterViewModel @Inject constructor(
                 }
                 is Resource.Error -> {
                     _eventFlow.emit(
-                        UiEvent.SnackbarEvent(result.uiText ?: UiText.unknownError())
+                        UiEvent.SnackbarEvent(registerResult.result.uiText ?: UiText.unknownError())
                     )
+                    _registerState.value = RegisterState(isLoading = false)
+                }
+                null -> {
                     _registerState.value = RegisterState(isLoading = false)
                 }
             }
         }
-    }
-
-    private fun validateUsername(username: String) {
-        val trimmedUsername = username.trim()
-        if (trimmedUsername.isBlank()) {
-            _usernameState.value = _usernameState.value.copy(
-                error = AuthErrors.FieldEmpty
-            )
-            return
-        }
-        if (trimmedUsername.length < Constants.MIN_USERNAME_LENGTH) {
-            _usernameState.value = _usernameState.value.copy(
-                error = AuthErrors.InputTooShort
-            )
-            return
-        }
-        _usernameState.value = _usernameState.value.copy(error = null)
-    }
-
-    private fun validateEmail(email: String) {
-        val trimmedEmail = email.trim()
-        if (trimmedEmail.isBlank()) {
-            _emailState.value = _emailState.value.copy(
-                error = AuthErrors.FieldEmpty
-            )
-            return
-        }
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            _emailState.value = _emailState.value.copy(
-                error = AuthErrors.InvalidEmail
-            )
-            return
-        }
-        _emailState.value = _emailState.value.copy(error = null)
-    }
-
-    private fun validatePassword(password: String) {
-        if (password.isBlank()) {
-            _passwordState.value = _passwordState.value.copy(
-                error = AuthErrors.FieldEmpty
-            )
-            return
-        }
-        if (password.length < Constants.MIN_PASSWORD_LENGTH) {
-            _passwordState.value = _passwordState.value.copy(
-                error = AuthErrors.InputTooShort
-            )
-            return
-        }
-        val capitalLettersInPassword = password.any { it.isUpperCase() }
-        val numberInPassword = password.any { it.isDigit() }
-        if (!capitalLettersInPassword || ! numberInPassword) {
-            _passwordState.value = passwordState.value.copy(
-                error = AuthErrors.InvalidPassword
-            )
-            return
-        }
-        _passwordState.value = _passwordState.value.copy(error = null)
-    }
-
-    private fun validatePasswordConfirmation(password: String, passwordConfirmation: String) {
-        if (passwordConfirmation.isBlank()) {
-            _passwordConfirmationState.value = _passwordConfirmationState.value.copy(
-                error = AuthErrors.FieldEmpty
-            )
-            return
-        }
-        if (passwordConfirmation != password) {
-            _passwordConfirmationState.value = _passwordConfirmationState.value.copy(
-                error = AuthErrors.PasswordDoesNotMatch
-            )
-            return
-        }
-        _passwordConfirmationState.value = _passwordConfirmationState.value.copy(error = null)
     }
 
     sealed class UiEvent {
