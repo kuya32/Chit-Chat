@@ -21,11 +21,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.github.kuya32.chitchat.R
-import com.github.kuya32.chitchat.presentation.components.StandardTextField
+import com.github.kuya32.chitchat.core.presentation.components.StandardTextField
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceLarge
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceMedium
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceSmall
-import com.github.kuya32.chitchat.presentation.utils.Screen
+import com.github.kuya32.chitchat.core.utils.Screen
 
 @Composable
 fun LoginScreen(

@@ -3,7 +3,7 @@ package com.github.kuya32.chitchat.presentation.edit_profile
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.github.kuya32.chitchat.presentation.utils.states.StandardTextFieldState
+import com.github.kuya32.chitchat.core.domain.states.StandardTextFieldState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

@@ -3,21 +3,18 @@ package com.github.kuya32.chitchat.presentation.main_feed
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.github.kuya32.chitchat.presentation.components.Post
+import com.github.kuya32.chitchat.core.presentation.components.Post
 import com.github.kuya32.chitchat.R
-import com.github.kuya32.chitchat.presentation.components.StandardToolbar
-import com.github.kuya32.chitchat.presentation.utils.Screen
+import com.github.kuya32.chitchat.core.presentation.components.StandardToolbar
+import com.github.kuya32.chitchat.core.utils.Screen
 
 
 @Composable
@@ -50,7 +47,7 @@ fun MainFeedScreen(
             }
         )
         Post(
-            post = com.github.kuya32.chitchat.domain.models.Post(
+            post = com.github.kuya32.chitchat.core.domain.models.Post(
                 username = "Marchael Acode",
                 imageUrl = "",
                 profileImageUrl = "",

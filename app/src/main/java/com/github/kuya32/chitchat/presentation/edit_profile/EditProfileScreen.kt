@@ -12,11 +12,9 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
@@ -32,12 +30,12 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.github.kuya32.chitchat.R
-import com.github.kuya32.chitchat.presentation.components.StandardTextField
-import com.github.kuya32.chitchat.presentation.components.StandardToolbar
+import com.github.kuya32.chitchat.core.presentation.components.StandardTextField
+import com.github.kuya32.chitchat.core.presentation.components.StandardToolbar
 import com.github.kuya32.chitchat.presentation.edit_profile.components.Chip
 import com.github.kuya32.chitchat.presentation.ui.theme.*
-import com.github.kuya32.chitchat.presentation.utils.states.StandardTextFieldState
-import com.github.kuya32.chitchat.presentation.utils.toPx
+import com.github.kuya32.chitchat.core.domain.states.StandardTextFieldState
+import com.github.kuya32.chitchat.core.utils.toPx
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.MainAxisAlignment
 import kotlin.random.Random
@@ -104,7 +102,7 @@ fun EditProfileScreen(
                             StandardTextFieldState(text = it)
                         )
                     },
-                    error = viewModel.usernameState.value.error,
+                    error = "",
                     hint = stringResource(id = R.string.username_hint),
                     leadingIcon = Icons.Default.Person,
                     keyboardType = KeyboardType.Text
@@ -118,7 +116,7 @@ fun EditProfileScreen(
                             StandardTextFieldState(text = it)
                         )
                     },
-                    error = viewModel.instagramState.value.error,
+                    error = "",
                     hint = stringResource(id = R.string.instagram_hint),
                     leadingIcon = ImageVector.vectorResource(id = R.drawable.ic_insta_icon),
                     keyboardType = KeyboardType.Text
@@ -132,7 +130,7 @@ fun EditProfileScreen(
                             StandardTextFieldState(text = it)
                         )
                     },
-                    error = viewModel.linkedInState.value.error,
+                    error = "",
                     hint = stringResource(id = R.string.linkedIn_hint),
                     leadingIcon = ImageVector.vectorResource(id = R.drawable.ic_linkedin_icon),
                     keyboardType = KeyboardType.Text
@@ -146,7 +144,7 @@ fun EditProfileScreen(
                             StandardTextFieldState(text = it)
                         )
                     },
-                    error = viewModel.githubState.value.error,
+                    error = "",
                     hint = stringResource(id = R.string.github_hint),
                     leadingIcon = ImageVector.vectorResource(id = R.drawable.ic_github_icon),
                     keyboardType = KeyboardType.Text
@@ -161,7 +159,7 @@ fun EditProfileScreen(
                         )
                     },
                     maxLines = 3,
-                    error = viewModel.bioState.value.error,
+                    error = "",
                     hint = stringResource(id = R.string.bio_hint),
                     leadingIcon = Icons.Default.Description,
                     keyboardType = KeyboardType.Text

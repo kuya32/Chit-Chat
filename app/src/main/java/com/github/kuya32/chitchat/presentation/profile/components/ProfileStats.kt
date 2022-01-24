@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import com.github.kuya32.chitchat.R
-import com.github.kuya32.chitchat.domain.models.User
+import com.github.kuya32.chitchat.core.domain.models.User
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceXXLarge
 
 @Composable

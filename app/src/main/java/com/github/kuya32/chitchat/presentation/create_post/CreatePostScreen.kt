@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Description
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,12 +17,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.github.kuya32.chitchat.R
-import com.github.kuya32.chitchat.presentation.components.StandardTextField
-import com.github.kuya32.chitchat.presentation.components.StandardToolbar
-import com.github.kuya32.chitchat.presentation.ui.theme.SpaceLarge
+import com.github.kuya32.chitchat.core.presentation.components.StandardTextField
+import com.github.kuya32.chitchat.core.presentation.components.StandardToolbar
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceMedium
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceSmall
-import com.github.kuya32.chitchat.presentation.utils.states.StandardTextFieldState
+import com.github.kuya32.chitchat.core.domain.states.StandardTextFieldState
 
 @Composable
 fun CreatePostScreen(
@@ -32,7 +29,6 @@ fun CreatePostScreen(
     onConfirmClick: () -> Unit = {},
     viewModel: CreatedPostViewModel = hiltViewModel()
 ) {
-    viewModel.taumBday(27984, 1402, 619246, 615589, 247954)
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -98,7 +94,7 @@ fun CreatePostScreen(
                 },
                 singleLine = false,
                 maxLines = 3,
-                error = viewModel.postDescriptionState.value.error,
+                error = "",
                 hint = stringResource(id = R.string.description_hint),
                 keyboardType = KeyboardType.Text
             )

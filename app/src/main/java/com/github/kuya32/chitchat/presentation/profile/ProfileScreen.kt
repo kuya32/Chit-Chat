@@ -9,10 +9,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
@@ -24,7 +21,6 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -32,17 +28,16 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.github.kuya32.chitchat.R
-import com.github.kuya32.chitchat.domain.models.Post
-import com.github.kuya32.chitchat.domain.models.User
-import com.github.kuya32.chitchat.presentation.components.Post
-import com.github.kuya32.chitchat.presentation.components.StandardToolbar
+import com.github.kuya32.chitchat.core.domain.models.Post
+import com.github.kuya32.chitchat.core.domain.models.User
+import com.github.kuya32.chitchat.core.presentation.components.Post
+import com.github.kuya32.chitchat.core.presentation.components.StandardToolbar
 import com.github.kuya32.chitchat.presentation.profile.components.BannerSection
 import com.github.kuya32.chitchat.presentation.profile.components.ProfileHeaderSection
 import com.github.kuya32.chitchat.presentation.ui.theme.LargeProfilePictureSize
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceMedium
-import com.github.kuya32.chitchat.presentation.ui.theme.SpaceSmall
-import com.github.kuya32.chitchat.presentation.utils.Screen
-import com.github.kuya32.chitchat.presentation.utils.toPx
+import com.github.kuya32.chitchat.core.utils.Screen
+import com.github.kuya32.chitchat.core.utils.toPx
 
 @Composable
 fun ProfileScreen(
