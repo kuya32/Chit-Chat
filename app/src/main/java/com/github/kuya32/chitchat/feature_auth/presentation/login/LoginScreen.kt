@@ -2,16 +2,16 @@ package com.github.kuya32.chitchat.feature_auth.presentation.login
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Password
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -22,16 +22,40 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.github.kuya32.chitchat.R
 import com.github.kuya32.chitchat.core.presentation.components.StandardTextField
+import com.github.kuya32.chitchat.core.presentation.util.asString
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceLarge
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceMedium
 import com.github.kuya32.chitchat.presentation.ui.theme.SpaceSmall
 import com.github.kuya32.chitchat.core.utils.Screen
+import com.github.kuya32.chitchat.feature_auth.presentation.util.AuthErrors
+import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun LoginScreen(
     navController: NavController,
+    scaffoldState: ScaffoldState,
     viewModel: LoginViewModel = hiltViewModel()
 ) {
+    val emailState = viewModel.emailState.value
+    val passwordState = viewModel.passwordState.value
+    val loginState = viewModel.loginState.value
+    val context = LocalContext.current
+
+    LaunchedEffect(key1 = true) {
+        viewModel.eventFlow.collectLatest { event ->
+            when (event) {
+                is LoginViewModel.UiEvent.SnackbarEvent -> {
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        message = event.uiText.asString(context)
+                    )
+                }
+                is LoginViewModel.UiEvent.Navigate -> {
+                    navController.navigate(event.route)
+                }
+            }
+        }
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -54,43 +78,58 @@ fun LoginScreen(
             )
             Spacer(modifier = Modifier.height(SpaceSmall))
             StandardTextField(
-                text = viewModel.usernameText.value,
+                text = emailState.text,
                 onValueChange = {
-                    viewModel.setUsernameText(it)
+                    viewModel.onEvent(LoginEvent.EnteredEmail(it))
                 },
-                error = viewModel.usernameError.value,
-                hint = stringResource(id = R.string.username_email_hint),
+                error = when (emailState.error) {
+                    is AuthErrors.FieldEmpty -> {
+                        stringResource(id = R.string.email_required)
+                    }
+                    else -> ""
+                },
+                hint = stringResource(id = R.string.email_hint),
                 keyboardType = KeyboardType.Email,
                 leadingIcon = Icons.Filled.Email
             )
             Spacer(modifier = Modifier.height(SpaceSmall))
             StandardTextField(
-                text = viewModel.passwordText.value,
+                text = passwordState.text,
                 onValueChange = {
-                    viewModel.setPasswordText(it)
+                    viewModel.onEvent(LoginEvent.EnteredPassword(it))
                 },
-                error = viewModel.passwordError.value,
+                error = when (passwordState.error) {
+                    is AuthErrors.FieldEmpty -> {
+                        stringResource(id = R.string.password_required)
+                    }
+                    else -> ""
+                },
                 hint = stringResource(id = R.string.password_hint),
                 keyboardType = KeyboardType.Password,
                 leadingIcon = Icons.Filled.Password,
-                isPasswordVisible = viewModel.showPassword.value,
+                isPasswordVisible = passwordState.isPasswordVisible,
                 onPasswordToggleClick = {
-                    viewModel.setShowPassword(it)
+                    viewModel.onEvent(LoginEvent.TogglePasswordVisibility)
                 }
             )
             Spacer(modifier = Modifier.height(SpaceSmall))
             Button(
                 onClick = {
-                      navController.navigate(Screen.MainFeedScreen.route)
-                    // TODO: Navigate to Main Feed
+                      viewModel.onEvent(LoginEvent.Login)
                 },
+                enabled = !loginState.isLoading,
                 modifier = Modifier
-                    .align(Alignment.End)
+                    .align(Alignment.End),
+
             ) {
                 Text(
                     text = stringResource(id = R.string.login),
                     color = MaterialTheme.colors.onPrimary
                 )
+                if (loginState.isLoading) {
+                    Spacer(modifier = Modifier.width(8.dp))
+                    CircularProgressIndicator(modifier = Modifier.size(24.dp))
+                }
             }
         }
         Text(

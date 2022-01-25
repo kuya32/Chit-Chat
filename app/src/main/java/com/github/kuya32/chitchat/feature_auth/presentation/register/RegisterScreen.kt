@@ -49,7 +49,7 @@ fun RegisterScreen(
                         duration = SnackbarDuration.Long
                     )
                 }
-        }
+            }
         }
     }
 
@@ -173,9 +173,10 @@ fun RegisterScreen(
                     text = stringResource(id = R.string.register),
                     color = MaterialTheme.colors.onPrimary
                 )
-            }
-            if (registerState.isLoading) {
-                CircularProgressIndicator()
+                if (registerState.isLoading) {
+                    Spacer(modifier = Modifier.width(8.dp))
+                    CircularProgressIndicator(modifier = Modifier.size(24.dp))
+                }
             }
         }
         Text(
