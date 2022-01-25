@@ -1,4 +1,4 @@
-package com.github.kuya32.chitchat.presentation.login
+package com.github.kuya32.chitchat.feature_auth.presentation.login
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*

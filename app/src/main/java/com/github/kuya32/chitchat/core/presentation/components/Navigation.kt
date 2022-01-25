@@ -16,7 +16,7 @@ import com.github.kuya32.chitchat.presentation.create_post.CreatePostScreen
 import com.github.kuya32.chitchat.presentation.edit_post.EditPostScreen
 import com.github.kuya32.chitchat.presentation.edit_profile.EditProfileScreen
 import com.github.kuya32.chitchat.presentation.main_feed.MainFeedScreen
-import com.github.kuya32.chitchat.presentation.login.LoginScreen
+import com.github.kuya32.chitchat.feature_auth.presentation.login.LoginScreen
 import com.github.kuya32.chitchat.presentation.message.MessageScreen
 import com.github.kuya32.chitchat.presentation.post_detail.PostDetailScreen
 import com.github.kuya32.chitchat.presentation.profile.ProfileScreen
