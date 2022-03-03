@@ -1,4 +1,4 @@
-package com.github.kuya32.chitchat.presentation.splash
+package com.github.kuya32.chitchat.feature_auth.presentation.splash
 
 import android.view.animation.OvershootInterpolator
 import androidx.compose.foundation.layout.Box
@@ -15,17 +15,21 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.draw.scale
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.github.kuya32.chitchat.core.presentation.util.UiEvent
 import com.github.kuya32.chitchat.core.utils.Screen
 import com.github.kuya32.chitchat.core.utils.Constants
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.withContext
 
 @Composable
 fun SplashScreen(
     navController: NavController,
-    dispatcher: CoroutineDispatcher = Dispatchers.Main
+    dispatcher: CoroutineDispatcher = Dispatchers.Main,
+    viewModel: SplashViewModel = hiltViewModel()
 ) {
     val scale = remember {
         Animatable(0f)
@@ -46,6 +50,17 @@ fun SplashScreen(
             )
             delay(Constants.SPLASH_SCREEN_DURATION)
             navController.navigate(Screen.LoginScreen.route)
+        }
+    }
+    LaunchedEffect(key1 = true) {
+        viewModel.eventFlow.collectLatest { event ->
+            when (event) {
+                is UiEvent.Navigate -> {
+                    navController.popBackStack()
+                    navController.navigate(event.route)
+                }
+                else -> Unit
+            }
         }
     }
     Box(

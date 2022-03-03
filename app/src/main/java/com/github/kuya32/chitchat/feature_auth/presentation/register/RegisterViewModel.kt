@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.github.kuya32.chitchat.R
 import com.github.kuya32.chitchat.core.domain.states.PasswordTextFieldState
 import com.github.kuya32.chitchat.core.domain.states.StandardTextFieldState
+import com.github.kuya32.chitchat.core.presentation.util.UiEvent
 import com.github.kuya32.chitchat.feature_auth.presentation.util.AuthErrors
 import com.github.kuya32.chitchat.core.utils.Constants
 import com.github.kuya32.chitchat.core.utils.Resource
@@ -131,9 +132,5 @@ class RegisterViewModel @Inject constructor(
                 }
             }
         }
-    }
-
-    sealed class UiEvent {
-        data class SnackbarEvent(val uiText: UiText): UiEvent()
     }
 }

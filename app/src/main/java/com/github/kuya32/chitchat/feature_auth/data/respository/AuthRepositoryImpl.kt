@@ -73,4 +73,19 @@ class AuthRepositoryImpl(
             )
         }
     }
+
+    override suspend fun authenticate(): SimpleResource {
+        return try {
+            api.authenticate()
+            Resource.Success(Unit)
+        } catch (e: IOException) {
+            Resource.Error(
+                uiText = UiText.StringResource(R.string.couldnt_reach_server)
+            )
+        } catch (e: HttpException) {
+            Resource.Error(
+                uiText = UiText.StringResource(R.string.something_went_wrong)
+            )
+        }
+    }
 }

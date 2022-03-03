@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import com.github.kuya32.chitchat.feature_auth.data.remote.AuthApi
 import com.github.kuya32.chitchat.feature_auth.data.respository.AuthRepositoryImpl
 import com.github.kuya32.chitchat.feature_auth.domain.repository.AuthRepository
+import com.github.kuya32.chitchat.feature_auth.domain.use_case.AuthenticateUseCase
 import com.github.kuya32.chitchat.feature_auth.domain.use_case.LoginUseCase
 import com.github.kuya32.chitchat.feature_auth.domain.use_case.RegisterUseCase
 import dagger.Module
@@ -44,5 +45,11 @@ object AuthModule {
     @Singleton
     fun providesLoginUseCase(repository: AuthRepository): LoginUseCase {
         return LoginUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun providesAuthenticateUseCase(repository: AuthRepository): AuthenticateUseCase {
+        return AuthenticateUseCase(repository)
     }
 }
