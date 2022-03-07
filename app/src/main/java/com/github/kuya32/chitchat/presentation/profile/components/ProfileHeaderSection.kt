@@ -22,7 +22,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.github.kuya32.chitchat.R
 import com.github.kuya32.chitchat.core.domain.models.User
-import com.github.kuya32.chitchat.presentation.ui.theme.*
+import com.github.kuya32.chitchat.core.presentation.ui.theme.SpaceLarge
+import com.github.kuya32.chitchat.core.presentation.ui.theme.SpaceSmall
+import com.github.kuya32.chitchat.core.presentation.ui.theme.SpaceXLarge
 
 @Composable
 fun ProfileHeaderSection(

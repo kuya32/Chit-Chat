@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.github.kuya32.chitchat.presentation.ui.theme.HintGray
+import com.github.kuya32.chitchat.core.presentation.ui.theme.HintGray
 
 @Composable
 fun RowScope.StandardBottomNavItem(

@@ -21,10 +21,11 @@ import androidx.navigation.NavController
 import com.github.kuya32.chitchat.R
 import com.github.kuya32.chitchat.feature_auth.presentation.util.AuthErrors
 import com.github.kuya32.chitchat.core.presentation.components.StandardTextField
+import com.github.kuya32.chitchat.core.presentation.util.UiEvent
 import com.github.kuya32.chitchat.core.presentation.util.asString
-import com.github.kuya32.chitchat.presentation.ui.theme.SpaceLarge
-import com.github.kuya32.chitchat.presentation.ui.theme.SpaceMedium
-import com.github.kuya32.chitchat.presentation.ui.theme.SpaceSmall
+import com.github.kuya32.chitchat.core.presentation.ui.theme.SpaceLarge
+import com.github.kuya32.chitchat.core.presentation.ui.theme.SpaceMedium
+import com.github.kuya32.chitchat.core.presentation.ui.theme.SpaceSmall
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -43,13 +44,13 @@ fun RegisterScreen(
     LaunchedEffect(key1 = true) {
         viewModel.eventFlow.collectLatest { event ->
             when(event) {
-                is RegisterViewModel.UiEvent.SnackbarEvent -> {
+                is UiEvent.SnackbarEvent -> {
                     scaffoldState.snackbarHostState.showSnackbar(
                         event.uiText.asString(context),
                         duration = SnackbarDuration.Long
                     )
                 }
-        }
+            }
         }
     }
 
@@ -173,9 +174,10 @@ fun RegisterScreen(
                     text = stringResource(id = R.string.register),
                     color = MaterialTheme.colors.onPrimary
                 )
-            }
-            if (registerState.isLoading) {
-                CircularProgressIndicator()
+                if (registerState.isLoading) {
+                    Spacer(modifier = Modifier.width(8.dp))
+                    CircularProgressIndicator(modifier = Modifier.size(24.dp))
+                }
             }
         }
         Text(

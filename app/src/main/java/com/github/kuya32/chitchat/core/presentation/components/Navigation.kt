@@ -12,16 +12,16 @@ import com.github.kuya32.chitchat.core.domain.models.Post
 import com.github.kuya32.chitchat.core.utils.Screen
 import com.github.kuya32.chitchat.presentation.PersonListScreen
 import com.github.kuya32.chitchat.presentation.activity.ActivityScreen
-import com.github.kuya32.chitchat.presentation.create_post.CreatePostScreen
+import com.github.kuya32.chitchat.feature_post.presentation.create_post.CreatePostScreen
 import com.github.kuya32.chitchat.presentation.edit_post.EditPostScreen
 import com.github.kuya32.chitchat.presentation.edit_profile.EditProfileScreen
-import com.github.kuya32.chitchat.presentation.main_feed.MainFeedScreen
-import com.github.kuya32.chitchat.presentation.login.LoginScreen
+import com.github.kuya32.chitchat.feature_post.presentation.main_feed.MainFeedScreen
+import com.github.kuya32.chitchat.feature_auth.presentation.login.LoginScreen
 import com.github.kuya32.chitchat.presentation.message.MessageScreen
-import com.github.kuya32.chitchat.presentation.post_detail.PostDetailScreen
+import com.github.kuya32.chitchat.feature_post.presentation.post_detail.PostDetailScreen
 import com.github.kuya32.chitchat.presentation.profile.ProfileScreen
 import com.github.kuya32.chitchat.feature_auth.presentation.register.RegisterScreen
-import com.github.kuya32.chitchat.presentation.splash.SplashScreen
+import com.github.kuya32.chitchat.feature_auth.presentation.splash.SplashScreen
 import com.github.kuya32.chitchat.presentation.search.SearchScreen
 
 @ExperimentalMaterialApi
@@ -32,14 +32,17 @@ fun Navigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.LoginScreen.route,
+        startDestination = Screen.SplashScreen.route,
         modifier = Modifier.fillMaxSize()
     ) {
         composable(Screen.SplashScreen.route) {
             SplashScreen(navController = navController)
         }
         composable(Screen.LoginScreen.route) {
-            LoginScreen(navController = navController)
+            LoginScreen(
+                navController = navController,
+                scaffoldState = scaffoldState
+            )
         }
         composable(Screen.RegisterScreen.route) {
             RegisterScreen(

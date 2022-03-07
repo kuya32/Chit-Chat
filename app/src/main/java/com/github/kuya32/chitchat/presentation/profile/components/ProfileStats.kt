@@ -16,7 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import com.github.kuya32.chitchat.R
 import com.github.kuya32.chitchat.core.domain.models.User
-import com.github.kuya32.chitchat.presentation.ui.theme.SpaceXXLarge
+import com.github.kuya32.chitchat.core.presentation.ui.theme.SpaceXXLarge
 
 @Composable
 fun ProfileStats(
