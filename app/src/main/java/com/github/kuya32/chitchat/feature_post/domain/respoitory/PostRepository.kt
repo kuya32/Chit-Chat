@@ -1,13 +1,12 @@
 package com.github.kuya32.chitchat.feature_post.domain.respoitory
 
+import androidx.paging.PagingData
 import com.github.kuya32.chitchat.core.domain.models.Post
 import com.github.kuya32.chitchat.core.utils.Constants
 import com.github.kuya32.chitchat.core.utils.Resource
+import kotlinx.coroutines.flow.Flow
 
 interface PostRepository {
 
-    suspend fun getPostForFollows(
-        page: Int = 0,
-        pageSize: Int = Constants.PAGE_SIZE_POSTS
-    ): Resource<List<Post>>
+    val posts: Flow<PagingData<Post>>
 }

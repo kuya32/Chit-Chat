@@ -1,17 +1,16 @@
 package com.github.kuya32.chitchat.feature_post.domain.use_case
 
+import androidx.paging.PagingData
 import com.github.kuya32.chitchat.core.domain.models.Post
 import com.github.kuya32.chitchat.core.utils.Resource
 import com.github.kuya32.chitchat.feature_post.domain.respoitory.PostRepository
+import kotlinx.coroutines.flow.Flow
 
 class GetPostsForFollowUseCase(
     private val repository: PostRepository
 ) {
 
-    suspend operator fun invoke(
-        page: Int,
-        pageSize: Int
-    ): Resource<List<Post>> {
-        return repository.getPostForFollows(page, pageSize)
+    operator fun invoke(): Flow<PagingData<Post>> {
+        return repository.posts
     }
 }

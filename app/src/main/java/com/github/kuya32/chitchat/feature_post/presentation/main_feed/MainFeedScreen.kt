@@ -3,6 +3,7 @@ package com.github.kuya32.chitchat.feature_post.presentation.main_feed
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -10,7 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.paging.LoadState
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.items
 import com.github.kuya32.chitchat.core.presentation.components.Post
 import com.github.kuya32.chitchat.R
 import com.github.kuya32.chitchat.core.presentation.components.StandardToolbar
@@ -19,8 +24,10 @@ import com.github.kuya32.chitchat.core.utils.Screen
 
 @Composable
 fun MainFeedScreen(
-    navController: NavController
+    navController: NavController,
+    viewModel: MainFeedViewModel = hiltViewModel()
 ) {
+    val posts = viewModel.posts.collectAsLazyPagingItems()
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -46,20 +53,40 @@ fun MainFeedScreen(
                 }
             }
         )
-        Post(
-            post = com.github.kuya32.chitchat.core.domain.models.Post(
-                username = "Marchael Acode",
-                imageUrl = "",
-                profileImageUrl = "",
-                description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-                likeCount = 17,
-                commentCount = 100
-            ),
-            onPostClick = {
-                // TODO: Navigate to post details depending on post
-                navController.navigate(Screen.PostDetailScreen.route)
+        LazyColumn {
+            items(posts) { post ->
+                Post(
+                    post = com.github.kuya32.chitchat.core.domain.models.Post(
+                        username = post?.username ?: "",
+                        imageUrl = post?.imageUrl ?: "",
+                        profileImageUrl = post?.profileImageUrl ?: "",
+                        description = post?.description ?: "",
+                        likeCount = post?.likeCount ?: 0,
+                        commentCount = post?.commentCount ?: 0
+                    ),
+                    onPostClick = {
+                        navController.navigate(Screen.PostDetailScreen.route)
+                    }
+                )
+                posts.apply {
+                    when {
+                        loadState.refresh !is LoadState.Loading -> {
+                            CircularProgressIndicator()
+                        }
+                        loadState.append is LoadState.Loading -> {
+                            //You can add modifier to manage load state when next response page is loading
+                        }
+                        loadState.append is LoadState.NotLoading -> {
+
+                        }
+                        loadState.append is LoadState.Error -> {
+                            //You can use modifier to show error message
+                        }
+                    }
+                }
             }
-        )
+
+        }
     }
 
 
