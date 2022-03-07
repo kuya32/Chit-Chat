@@ -1,4 +1,4 @@
-package com.github.kuya32.chitchat.presentation.main_feed
+package com.github.kuya32.chitchat.feature_post.presentation.main_feed
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize

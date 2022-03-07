@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.github.kuya32.chitchat.core.presentation.components.StandardScaffold
-import com.github.kuya32.chitchat.presentation.ui.theme.ChitChatTheme
+import com.github.kuya32.chitchat.core.presentation.ui.theme.ChitChatTheme
 import com.github.kuya32.chitchat.core.presentation.components.Navigation
 import com.github.kuya32.chitchat.core.utils.Screen
 import dagger.hilt.android.AndroidEntryPoint

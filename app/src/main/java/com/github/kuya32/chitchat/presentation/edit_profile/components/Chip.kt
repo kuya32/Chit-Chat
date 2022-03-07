@@ -14,8 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.github.kuya32.chitchat.presentation.ui.theme.SpaceMedium
-import com.github.kuya32.chitchat.presentation.ui.theme.SpaceSmall
+import com.github.kuya32.chitchat.core.presentation.ui.theme.SpaceMedium
+import com.github.kuya32.chitchat.core.presentation.ui.theme.SpaceSmall
 
 @Composable
 fun Chip(

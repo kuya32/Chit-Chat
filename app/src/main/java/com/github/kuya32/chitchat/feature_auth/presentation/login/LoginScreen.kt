@@ -24,9 +24,9 @@ import com.github.kuya32.chitchat.R
 import com.github.kuya32.chitchat.core.presentation.components.StandardTextField
 import com.github.kuya32.chitchat.core.presentation.util.UiEvent
 import com.github.kuya32.chitchat.core.presentation.util.asString
-import com.github.kuya32.chitchat.presentation.ui.theme.SpaceLarge
-import com.github.kuya32.chitchat.presentation.ui.theme.SpaceMedium
-import com.github.kuya32.chitchat.presentation.ui.theme.SpaceSmall
+import com.github.kuya32.chitchat.core.presentation.ui.theme.SpaceLarge
+import com.github.kuya32.chitchat.core.presentation.ui.theme.SpaceMedium
+import com.github.kuya32.chitchat.core.presentation.ui.theme.SpaceSmall
 import com.github.kuya32.chitchat.core.utils.Screen
 import com.github.kuya32.chitchat.feature_auth.presentation.util.AuthErrors
 import kotlinx.coroutines.flow.collectLatest

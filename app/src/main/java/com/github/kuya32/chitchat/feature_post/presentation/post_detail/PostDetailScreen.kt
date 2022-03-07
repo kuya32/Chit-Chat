@@ -1,4 +1,4 @@
-package com.github.kuya32.chitchat.presentation.post_detail
+package com.github.kuya32.chitchat.feature_post.presentation.post_detail
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -31,7 +31,7 @@ import com.github.kuya32.chitchat.core.domain.models.Comment
 import com.github.kuya32.chitchat.core.domain.models.Post
 import com.github.kuya32.chitchat.core.presentation.components.ActionRow
 import com.github.kuya32.chitchat.core.presentation.components.StandardToolbar
-import com.github.kuya32.chitchat.presentation.ui.theme.*
+import com.github.kuya32.chitchat.core.presentation.ui.theme.*
 import com.github.kuya32.chitchat.core.utils.Screen
 import com.github.kuya32.chitchat.core.utils.Constants
 

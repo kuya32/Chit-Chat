@@ -33,8 +33,11 @@ import com.github.kuya32.chitchat.R
 import com.github.kuya32.chitchat.core.presentation.components.StandardTextField
 import com.github.kuya32.chitchat.core.presentation.components.StandardToolbar
 import com.github.kuya32.chitchat.presentation.edit_profile.components.Chip
-import com.github.kuya32.chitchat.presentation.ui.theme.*
 import com.github.kuya32.chitchat.core.domain.states.StandardTextFieldState
+import com.github.kuya32.chitchat.core.presentation.ui.theme.LargeProfilePictureSize
+import com.github.kuya32.chitchat.core.presentation.ui.theme.SpaceMedium
+import com.github.kuya32.chitchat.core.presentation.ui.theme.SpaceSmall
+import com.github.kuya32.chitchat.core.presentation.ui.theme.SpaceXXLarge
 import com.github.kuya32.chitchat.core.utils.toPx
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.MainAxisAlignment

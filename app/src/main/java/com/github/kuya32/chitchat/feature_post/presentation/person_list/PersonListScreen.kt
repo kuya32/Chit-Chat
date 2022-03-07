@@ -16,7 +16,7 @@ import com.github.kuya32.chitchat.R
 import com.github.kuya32.chitchat.core.domain.models.User
 import com.github.kuya32.chitchat.core.presentation.components.StandardToolbar
 import com.github.kuya32.chitchat.core.presentation.components.UserProfileItem
-import com.github.kuya32.chitchat.presentation.ui.theme.SpaceMedium
+import com.github.kuya32.chitchat.core.presentation.ui.theme.SpaceMedium
 
 
 @ExperimentalMaterialApi

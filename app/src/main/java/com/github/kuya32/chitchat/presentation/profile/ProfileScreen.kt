@@ -34,8 +34,8 @@ import com.github.kuya32.chitchat.core.presentation.components.Post
 import com.github.kuya32.chitchat.core.presentation.components.StandardToolbar
 import com.github.kuya32.chitchat.presentation.profile.components.BannerSection
 import com.github.kuya32.chitchat.presentation.profile.components.ProfileHeaderSection
-import com.github.kuya32.chitchat.presentation.ui.theme.LargeProfilePictureSize
-import com.github.kuya32.chitchat.presentation.ui.theme.SpaceMedium
+import com.github.kuya32.chitchat.core.presentation.ui.theme.LargeProfilePictureSize
+import com.github.kuya32.chitchat.core.presentation.ui.theme.SpaceMedium
 import com.github.kuya32.chitchat.core.utils.Screen
 import com.github.kuya32.chitchat.core.utils.toPx
 

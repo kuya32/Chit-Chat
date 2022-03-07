@@ -1,4 +1,4 @@
-package com.github.kuya32.chitchat.presentation.create_post
+package com.github.kuya32.chitchat.feature_post.presentation.create_post
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -19,8 +19,8 @@ import androidx.navigation.NavController
 import com.github.kuya32.chitchat.R
 import com.github.kuya32.chitchat.core.presentation.components.StandardTextField
 import com.github.kuya32.chitchat.core.presentation.components.StandardToolbar
-import com.github.kuya32.chitchat.presentation.ui.theme.SpaceMedium
-import com.github.kuya32.chitchat.presentation.ui.theme.SpaceSmall
+import com.github.kuya32.chitchat.core.presentation.ui.theme.SpaceMedium
+import com.github.kuya32.chitchat.core.presentation.ui.theme.SpaceSmall
 import com.github.kuya32.chitchat.core.domain.states.StandardTextFieldState
 
 @Composable

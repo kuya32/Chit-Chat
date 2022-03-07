@@ -8,7 +8,7 @@ import com.github.kuya32.chitchat.core.utils.SimpleResource
 import com.github.kuya32.chitchat.core.utils.UiText
 import com.github.kuya32.chitchat.feature_auth.data.dto.request.CreateAccountRequest
 import com.github.kuya32.chitchat.feature_auth.data.dto.request.LoginRequest
-import com.github.kuya32.chitchat.feature_auth.data.remote.AuthApi
+import com.github.kuya32.chitchat.feature_auth.data.data_source.remote.AuthApi
 import com.github.kuya32.chitchat.feature_auth.domain.repository.AuthRepository
 import retrofit2.HttpException
 import java.io.IOException

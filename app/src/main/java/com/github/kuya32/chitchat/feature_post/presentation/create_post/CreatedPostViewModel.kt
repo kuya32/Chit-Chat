@@ -1,4 +1,4 @@
-package com.github.kuya32.chitchat.presentation.create_post
+package com.github.kuya32.chitchat.feature_post.presentation.create_post
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf

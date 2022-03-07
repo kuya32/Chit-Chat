@@ -1,4 +1,4 @@
-package com.github.kuya32.chitchat.presentation.ui.theme
+package com.github.kuya32.chitchat.core.presentation.ui.theme
 
 import androidx.compose.ui.unit.dp
 
